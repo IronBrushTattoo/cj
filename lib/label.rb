@@ -1,4 +1,5 @@
 class Label
+  #include Sheets
 
   def initialize(gauge, size, desc, id, price, supply, updated)
     @gauge = gauge
@@ -10,6 +11,6 @@ class Label
     @updated = updated
   end
 
-  
-  
+  attr_reader :gauge, :size, :desc, :id, :price, :supply, :updated
+
 end

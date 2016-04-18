@@ -1,0 +1,328 @@
+Products,,,,,,,,
+,,,,,,,,
+,Product ID,Description,Retail,Size,Supplier,Stock Count,Reorder Point,Reorder Qty
+,CJ001-141-258CL,CJ Banana E 5X8mm clear,$25.00,14 1/2,Metal Mafia,6,0,0
+,CJ002-BRTCZ1LCL,Tragus Cascading Ext leftside Clear,$25.00,16g 1/4,Metal Mafia,1,0,0
+,CJ003-BRTCZ1RCL,Tragus Cascading Ext rightside Clear,$25.00,16g 1/4,Metal Mafia,1,0,0
+,CJ004-BRTOP2RBL,Tragus Cascading Ext Opal Blue,$30.00,16g 1/4,Metal Mafia,0,0,0
+,CJ005-BRTOP1RWH,Tragus Cascading Ext Opal White,$30.00,16g 1/4,Metal Mafia,0,0,0
+,CJ006-BRTSPRW,Tragus Sparrow Ext,$25.00,16g 1/4,Metal Mafia,1,0,0
+,CJ007-BNED141-258,Navel 5x8mm CL,$25.00,14g 1/2,Metal Mafia,4,0,0
+,CJ008-BNED143-858,BNED 5x8mm CL,$25.00,14G 3/8,Metal Mafia,3,0,0
+,CJ010-C141-25,Captive Bead Ring 5mm CL,$15.00,14g 1/2,Metal Mafia,4,0,0
+,CJ011-C163-83,Captive Bead Ring 3mm CL,$15.00,16g 3/8,Metal Mafia,4,0,0
+,CJ012-CVED163-83CL,Curved Barbell E CL,$15.00,16g 3/8,Metal Mafia,4,0,0
+,CJ013-CVED165-163CL,Curved Barbell E CL,$15.00,16g 5/16,Metal Mafia,4,0,0
+,CJ014-LBE143-84,Labret E 4mm CL,$15.00,14g 3/8 4,Metal Mafia,4,0,0
+,CJ015-LBE163-83CL,Labret E 3mm CL,$15.00,16g 3/8 3,Metal Mafia,4,0,0
+,CJ016-BKC143-84,Captive Bead Ring 4mm Black,$20.00,14g 3/8 4,Metal Mafia,4,0,0
+,CJ017-BKC145-164,Captive Bead Ring 4mm Black,$20.00,14g 5/16 4,Metal Mafia,5,0,0
+,CJ018-BKC145-85,Captive Bead Ring 5mm Black,$20.00,14g 5/8 5,Metal Mafia,5,0,0
+,CJ019-BKC147-164,Captive Bead Ring 4mm Black,$20.00,14g 7/16 4,Metal Mafia,2,0,0
+,CJ020-BCK163-83,Captive Bead Ring 3mm Black,$20.00,16g 3/8 3,Metal Mafia,5,0,0
+,CJ021-BKC165-163,Captive Bead Ring 3mm Black,$20.00,16g 5/16,Metal Mafia,4,0,0
+,CJ022-BKC183-83,Captive Bead Ring 3mm Black,$20.00,18g 3/8 3,Metal Mafia,4,0,0
+,CJ023-BKC185-163,Captive Bead Ring 3mm Black,$20.00,18g 5/16,Metal Mafia,3,0,0
+,CJ024-BKCVE141-24,Curved Barbell E 4mm Black,$20.00,14g 1/2 4,Metal Mafia,0,0,0
+,CJ025-BKCVE143-84,Curved Barbell 4mm Black,$20.00,14g 3/8 4,Metal Mafia,2,0,0
+,CJ026-BKCVE163-83,Curved Barbell E 3mm Black,$20.00,16g 3/8 3,Metal Mafia,4,0,0
+,CJ027-BKHSE165-163,Horse Shoe E 3mm Black,$20.00,16g 5/16 3,Metal Mafia,1,0,0
+,CJ028-CKLBE143-84,Labret E 4mm,$20.00,14g 3/8 4,Metal Mafia,2,0,0
+,CJ029-BKLBE145-164,Labret E 4mm,$20.00,14g 5/16 4,Metal Mafia,1,0,0
+,CJ030-BKLBE161-43,Labret E 3mm Black,$20.00,16g 1/4 3,Metal Mafia,1,0,0
+,CJ031-BKLBE163-83,Labret E 3mm Black,$20.00,16g 3/8 3,Metal Mafia,2,0,0
+,CJ0322-LBE165-163SP,Labret E 3mm SP,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ0323-LBE165-163LG,Labret E 3mm LG,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ0324-LBE165-163AB,Labret E 3mm AB,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ0325-LBE165-163PK,Labret E 3mm PK,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ0326-LBE165-163AQ,Labret E 3mm AQ,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ0327-LBE165-163BZ,Labret E 3mm BZ,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ0328-LBE165-163DG,Labret E 3mm DG,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ0329-LBE165-163TZ,Labret E 3mm TZ,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ032-BKLBE165-163,Labret E 3mm Black,$20.00,16g 5/16 3,Metal Mafia,1,0,0
+,CJ0330-LBE165-163BK,Labret E 3mm BK,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ0331-LBE165-163CL,Labret E 3mm CL,$15.00,16g 5/16,Metal Mafia,4,0,0
+,CJ0332-BKCVE165-163,Curved Barbell E Black,$20.00,15g 5/16,Metal Mafia,2,0,0
+,CJ0333-SC3145-16S,Septum Clicker,$35.00,14 5/16,Metal Mafia,1,0,0
+,CJ0334-ORG2095,14kt Gold Septum Jewelry 18g,$45.00,18 3/8,Painful Pleasures,1,0,0
+,CJ0335-ORG2101,Gold Plated KWS4 Septum Jewelry,$45.00,18 3/8,Painful Pleasures,1,0,0
+,CJ0336-ORG1650,Gold Plated Tribal Fan Septum Ring,$45.00,18 5/16,Painful Pleasures,0,0,0
+,CJ0337-MN0091-DB,Navel EXT Orchid Dark Blue,$35.00,14 7/16,Painful Pleasures,1,0,0
+,CJ0338-MN1146-CHARCO,Titanium Circular Barbell EXT Charcoal,$20.00,14 3/8 4,Painful Pleasures,1,0,0
+,CJ0339-MN1146-GOLD,Titanium Circular Barbell EXT Gold,$20.00,14 3/8 4,Painful Pleasures,1,0,0
+,CJ033-BKLBES143-8,Labret E 4mm cone,$20.00,14g 3/8 4,Metal Mafia,1,0,0
+,CJ0340-MN1537-CL,Navel EXT Double Prong Clear,$30.00,14 7/16,Painful Pleasures,1,0,0
+,CJ0341-MN1567-PURPLE,Navel EXT Flower Purple,$30.00,14 3/8,Painful Pleasures,1,0,0
+,CJ0342-SNS121,Nostril Pin Gold Plated CZ,$25.00,18,Painful Pleasures,4,0,0
+,CJ0343-UR411-10-CHAR,Circ. Barbell Tit. Charcoal,$20.00,18 3/8,Painful Pleasures,1,0,0
+,CJ0344-UR411-10-GOLD,Circ. Barbell Tit. Gold,$20.00,18 3/8,Painful Pleasures,1,0,0
+,CJ034-BKLBES165-16,Labret E 3mm Cone Black,$20.00,16g 5/16 3,Metal Mafia,1,0,0
+,CJ035-BKNH185-16,Nose Hoop Black,$20.00,18g 5/16,Metal Mafia,6,0,0
+,CJ036-BKSMR163-8,Seamless Ring Black,$20.00,16g 3/8,Metal Mafia,4,0,0
+,CJ037-BKSMR165-16,Seamless Ring Black,$20.00,16g 5/16,Metal Mafia,6,0,0
+,CJ038-BKSMR183-8,Seamless Ring Black,$20.00,18g 3/8,Metal Mafia,6,0,0
+,CJ039-BKSMR185-16,Seamless Ring Black,$20.00,18g 5/16,Metal Mafia,6,0,0
+,CJ040-BNAFN1,Navel Barbell w/ Dangle Fan,$30.00,14g 3/8,Metal Mafia,1,0,0
+,CJ041-BNAMC12CL,Navel Prong Butterfly CZ,$30.00,14 7/16,Metal Mafia,1,0,0
+,CJ042-BNAMC12PK,Navel Prong Butterfly Pink,$30.00,14g 1/4,Metal Mafia,0,0,0
+,CJ043-BNAMC7CL,Navel 14g 3/8 Flower CZ,$30.00,14g 3/8,Metal Mafia,0,0,0
+,CJ044-BNAMC9AQ,Navel Prong Octagon 5mm Aqua,$30.00,14 7/16,Metal Mafia,2,0,0
+,CJ045-BNAMC9PK,Navel Prong Octagon 5mm Pink,$30.00,14g 7/16,Metal Mafia,2,0,0
+,CJ046-BNAMC9CL,Navel Prong Octagon 5mm Clear,$30.00,14g 7/16,Metal Mafia,1,0,0
+,CJ047-BNED143-858AB,Navel E Dbl Gem 5/8mm,$25.00,14g 5/8mm,Metal Mafia,6,0,0
+,CJ048-BNED143-858AQ,Naval E 5x8mm,$25.00,14g 5/8mm,Metal Mafia,6,0,0
+,CJ049-BNED143-88CL,Navel E Clear 5x8mm,$25.00,14g 3/8,Metal Mafia,6,0,0
+,CJ050-BRE141-254,Industrial E,$15.00,14g 1-1/2,Metal Mafia,11,0,0
+,CJ051-BRE1411-45,Industrial  5mm,$15.00,14g 1-1/4,Metal Mafia,12,0,0
+,CJ052-BRE1415,Straight Barbell E,$15.00,14g 1,Metal Mafia,12,0,0
+,CJ053-BRE143-44,Straight Barbell E 4mm,$15.00,14g 3/4,Metal Mafia,10,0,0
+,CJ054-BRE143-84,Straight Barbell 4mm,$15.00,14g 3/8,Metal Mafia,12,0,0
+,CJ056-BRE145-164,Straight Barbell 4mm,$15.00,14g 5/16,Metal Mafia,12,0,0
+,CJ057-BRE145-84,Straight Barbell 4mm,$15.00,14g 5/8,Metal Mafia,12,0,0
+,CJ058-BRE147-164,Straight Barbell 4mm,$15.00,14g 7/16,Metal Mafia,12,0,0
+,CJ05-BRE147-84,Straight Barbell 4mm,$15.00,14g 7/8,Metal Mafia,12,0,0
+,CJ060-BRE161-43,Straight Barbell 3mm,$15.00,16g 1/4,Metal Mafia,12,0,0
+,CJ061-BRE163-83,Straight Barbell 3mm,$15.00,16g 3/8,Metal Mafia,12,0,0
+,CJ062-BRE167-163,Straight Barbell 3mm,$15.00,16g 7/16,Metal Mafia,12,0,0
+,CJ063-BRE185-163,Straight Barbell 3mm,$15.00,18g 5/16,Metal Mafia,12,0,0
+,CJ064-BRIND78,Industrial Sparrow,$25.00,1-1/4,Metal Mafia,1,0,0
+,CJ065-C141-25,Captive Bead Ring 5mm,$15.00,14g 1/2,Metal Mafia,12,0,0
+,CJ066-C141-44,Captive Bead Ring 4mm,$15.00,14g 1/4,Metal Mafia,12,0,0
+,CJ067-CBR143-84,Captive Bead Ring 4mm,$15.00,14g 3/8,Metal Mafia,12,0,0
+,CJ068-C145-164,Captive Bead Ring 4MM,$15.00,14g 5/16,Metal Mafia,12,0,0
+,CJ069-C145-85,Captive Bead Ring 5mm,$15.00,14g 5/8,Metal Mafia,12,0,0
+,CJ070-C147-165,Captive Bead Ring 5mm,$15.00,14g 7/16,Metal Mafia,12,0,0
+,CJ071-C149-165,Captive Bead Ring 5mm,$15.00,14g 9/16,Metal Mafia,12,0,0
+,CJ072-C161-23,Captive Bead Ring 3mm,$15.00,16g 1/2,Metal Mafia,12,0,0
+,CJ073-C161-43,Captive Bead Ring 3mm,$15.00,16g 1/4,Metal Mafia,12,0,0
+,CJ074-C163-83,Captive Bead Ring 3MM,$15.00,16G 3/8,Metal Mafia,12,0,0
+,CJ075-C165-163,Captive Bead Ring 3MM,$15.00,16G 5/16,Metal Mafia,12,0,0
+,CJ076-C167-163,Captive Bead Ring 3mm,$15.00,16g 7/16,Metal Mafia,12,0,0
+,CJ077-C181-43,Captive Bead Ring 3MM,$15.00,18G 1/4,Metal Mafia,12,0,0
+,CJ078-C183-83,Captive Bead Ring 3MM,$15.00,18G 3/8,Metal Mafia,12,0,0
+,CJ079-C185-163,Captive Bead Ring 3MM,$15.00,18G 5/16,Metal Mafia,12,0,0
+,CJ080-C201-43,Captive Bead Ring 3MM,$15.00,20G 1/4,Metal Mafia,12,0,0
+,CJ081-C203-83,Captive Bead Ring 3MM,$15.00,20G 3/8,Metal Mafia,12,0,0
+,CJ082-CBEE1S,Captive Bead Ring Honey Comb,$25.00,14g 1/2,Metal Mafia,2,0,0
+,CJ083-CC1SHW,Captive Bead Ring Diamond White,$30.00,14g 1/2,Metal Mafia,1,0,0
+,CJ084-CC1SOX,Captive Bead Ring Diamond Onyx,$30.00,14g 1/2,Metal Mafia,3,0,0
+,CJ085-CC1STHW,Captive Bead Ring Diamond Turquoise,$30.00,14g 1/2,Metal Mafia,3,0,0
+,CJ086-COP2BL,Captive Bead Ring Steam Punk,$30.00,14g 1/2,Metal Mafia,2,0,0
+,CJ087-COP2WH,Captive Bead Ring Steampunk,$30.00,14g 1/2,Metal Mafia,1,0,0
+,CJ088-CRS1,Captive Bead Ring Silver Rose,$30.00,14g 1/2,Metal Mafia,2,0,0
+,CJ089-CSPW,Captive Bead Ring Sparrow,$25.00,14g 1/2,Metal Mafia,2,0,0
+,CJ090-CT10,Taper Steel Curved 10g,$25.00,10g,Metal Mafia,2,0,0
+,CJ091-CT12,Taper Steel Curved 12g,$25.00,12g,Metal Mafia,2,0,0
+,CJ092-CT14,Taper Steel Curved 14g,$25.00,14g,Metal Mafia,2,0,0
+,CJ094-CT6,Taper Steel Curved 6g,$25.00,6g,Metal Mafia,0,0,0
+,CJ095-CT8,Taper Steel Cuved 8g,$25.00,8g,Metal Mafia,2,0,0
+,CJ096-CVE141-24,Curved Barbell 4mm,$15.00,14g 1/2,Metal Mafia,10,0,0
+,CJ097-CVE143-84,Curved Barbell 4mm,$15.00,14G 3/8,Metal Mafia,12,0,0
+,CJ098-145-164,Curved Barbell 4mm,$15.00,14G 5/16,Metal Mafia,12,0,0
+,CJ099-CVE145-84,Curved Barbell 4mm,$15.00,14G 5/8,Metal Mafia,12,0,0
+,CJ100-CVE147-164,Curved Barbell 4mm,$15.00,14G 7/16,Metal Mafia,12,0,0
+,CJ101-CVE147-1646,Naval 4/6MM,$15.00,14G 7/16,Metal Mafia,12,0,0
+,CJ102-CVE149-164,Curved Barbell 4mm,$15.00,14G 9/16,Metal Mafia,12,0,0
+,CJ103-CVE161-43,Curved Barbell 3mm,$15.00,16g 1/4,Metal Mafia,12,0,0
+,CJ105-165-163,Curved Barbell 3mm,$15.00,16G 5/16,Metal Mafia,11,0,0
+,CJ106-CVE181-43,Curved Barbell 3mm,$15.00,18G 1/4,Metal Mafia,12,0,0
+,CJ108-CVE185-163,Curved Barbell 3mm,$15.00,18G 5/16,Metal Mafia,12,0,0
+,CJ109-HSE141-25,Horseshoe E 5mm,$15.00,14g 1/2,Metal Mafia,12,0,0
+,CJ110-HSE143-84,Horseshoe E 4MM,$15.00,14G 3/8,Metal Mafia,12,0,0
+,CJ112-HSE147-165,Horseshoe E 5MM,$15.00,14G 7/16,Metal Mafia,12,0,0
+,CJ113-HSE16143,Horseshoe E 3MM,$15.00,16G 1/4,Metal Mafia,12,0,0
+,CJ114-HSE163-83,Horseshoe E 3MM,$15.00,16G 3/8,Metal Mafia,11,0,0
+,CJ115-HSE167-164,Horseshoe E 4MM,$15.00,16G 7/16,Metal Mafia,12,0,0
+,CJ116-HSE181-43,Horseshoe E 3MM,$15.00,14G 1/4,Metal Mafia,12,0,0
+,CJ117-HSE183-83,Horseshoe E 3MM,$15.00,18G 3/8,Metal Mafia,12,0,0
+,CJ118-HSE185-163,Horseshoe E 3MM,$15.00,18G 5/16,Metal Mafia,12,0,0
+,CJ119-HSES143-8,Horseshoe CONES,$15.00,14G 3/8,Metal Mafia,12,0,0
+,CJ120-HSES163-8,Horseshoe E CONES,$15.00,16G 3/8,Metal Mafia,12,0,0
+,CJ121-HSES183-8,Horseshoe E,$15.00,18G 3/8,Metal Mafia,12,0,0
+,CJ122-LBE141-44,Labret,$15.00,14g 1/4,Metal Mafia,6,0,0
+,CJ123-LBE143-84,Labret 14G,$15.00,14G 3/8,Metal Mafia,6,0,0
+,CJ124-LBE145-164,Labret 4MM,$15.00,14G 5/16,Metal Mafia,6,0,0
+,CJ125-LBE161-43,Labret 16G,$15.00,16G 1/4,Metal Mafia,12,0,0
+,CJ126-NH183-8,Nose Hoop,$15.00,18g 3/8,Metal Mafia,6,0,0
+,CJ127-NH185-16,Nose Hoop,$15.00,18g 5/16,Metal Mafia,4,0,0
+,CJ128-NH203-8,Nose Hoop,$15.00,20G 3/8,Metal Mafia,6,0,0
+,CJ129-NH205-16,Nose Hoop,$15.00,20G 5/16,Metal Mafia,6,0,0
+,CJ130-NP18DOME,Nose Pin Dome,$15.00,18g 5/8,Metal Mafia,6,0,0
+,CJ131-NP18OBL,Nose Pin OPAL 2.3MM,$20.00,18G 1/2,Metal Mafia,6,0,0
+,CJ132-NP18OLPRP,Nose Pin 2.3MM Purple,$20.00,18G 1/2,Metal Mafia,5,0,0
+,CJ133-NP18OWH,Nose Pin 2.3MM White,$20.00,18G 1/2,Metal Mafia,6,0,0
+,CJ134-NP20,Nose Pin 20G,$15.00,20G 5/8,Metal Mafia,6,0,0
+,CJ135-NP20AB,Nose Pin 20G,$15.00,20G 5/8,Metal Mafia,5,0,0
+,CJ136-NP20CL,Nose Pin CL,$15.00,20G 5/8,Metal Mafia,5,0,0
+,CJ137-NP20LG,Nose Pin LG,$15.00,20G 5/8,Metal Mafia,6,0,0
+,CJ138-NPS11,Nipple Stirrup,$30.00,14g 5/8,Metal Mafia,2,0,0
+,CJ139-NPSN1WH,Nipple Stirrup,$35.00,14g 9/16,Metal Mafia,0,0,0
+,CJ140-PN101-2,Pinchers,$25.00,10g 1/2,Metal Mafia,1,0,0
+,CJ141-PN123-8,Pinchers,$25.00,12G 3/8,Metal Mafia,1,0,0
+,CJ142-PN143-8,Pinchers,$25.00,14G 3/8,Metal Mafia,1,0,0
+,CJ143-PN165-16,Pinchers,$25.00,16G 5/16,Metal Mafia,1,0,0
+,CJ144-PN81-2,Pinchers,$25.00,8G 1/2,Metal Mafia,1,0,0
+,CJ145-SC3145-16BK,Septum Clicker Black,$35.00,14g 5/16,Metal Mafia,1,0,0
+,CJ146-SC3161-4BK,Septum Clicker Black,$35.00,16G 1/4,Metal Mafia,0,0,0
+,CJ147-SC3165-16S,Septum Clicker,$35.00,16G 5/16,Metal Mafia,0,0,0
+,CJ148-SC4165-16S,Septum Clicker,$35.00,16G 5/16,Metal Mafia,0,0,0
+,CJ149-SC5165-16BK,Septum Clicker Black,$35.00,16G 5/16,Metal Mafia,0,0,0
+,CJ150-SC5165-16S,Septum Clicker,$35.00,16G 5/16,Metal Mafia,1,0,0
+,CJ151-SHR183-8,Heart Shaped Seamless Ring,$15.00,18g 3/8,Metal Mafia,6,0,0
+,CJ152-SHR185-16,Heart Shaped Seamelss Ring,$15.00,18g 5/16,Metal Mafia,4,0,0
+,CJ153-SMR163-8,Seamless Ring,$15.00,16g 3/8,Metal Mafia,6,0,0
+,CJ154-SMR183-8,Seamless Ring,$15.00,18G 3/8,Metal Mafia,6,0,0
+,CJ155-SMR185-16,Seamless Ring,$15.00,18G 5-16,Metal Mafia,6,0,0
+,CJ156-ST0,Taper Steel Straight 0g,$25.00,0g,Metal Mafia,2,0,0
+,CJ157-ST10,Taper Steel Straight 10g,$25.00,10g,Metal Mafia,2,0,0
+,CJ158-ST12,Taper Steel Straight 12g,$25.00,12g,Metal Mafia,2,0,0
+,CJ159-ST14G,Taper Steel Straight 14g,$25.00,14g,Metal Mafia,2,0,0
+,CJ160-ST16G,Taper Steel Straight 16g,$25.00,16g,Metal Mafia,2,0,0
+,CJ161-ST18,Taper Steel Straight 18g,$25.00,18g,Metal Mafia,2,0,0
+,CJ162-ST2,Taper Steel Straight 2g,$25.00,2g,Metal Mafia,2,0,0
+,CJ163-ST4,Taper Steel Straight 4g,$25.00,4g,Metal Mafia,2,0,0
+,CJ164-ST6,Taper Steel Straight 6g,$25.00,6g,Metal Mafia,2,0,0
+,CJ165-ST8,Taper Steel Straight 8g,$25.00,8g,Metal Mafia,2,0,0
+,CJ166-STUDO4,Steel Earing Prong Set,$15.00,20G,Metal Mafia,2,0,0
+,CJ167-STUDO5,Steel Earing Prong Set,$15.00,20G,Metal Mafia,1,0,0
+,CJ177-TSF0,Single Flair Tunnel 0g,$10.00,0G,Metal Mafia,2,0,0
+,CJ178-TSF10,Single Flair Tunnel 10G,$10.00,10G,Metal Mafia,2,0,0
+,CJ179-TSF4,Single Flair Tunnel 4G,$10.00,4G,Metal Mafia,2,0,0
+,CJ180-TSF6,Single Flair Tunnel 8G,$10.00,8G,Metal Mafia,2,0,0
+,CJ181-TSF8,Single Flair Tunnel 8G,$10.00,8G,Metal Mafia,0,0,0
+,CJ182-MN0062-LBL,Navel Cat's Eye Light Blue,$30.00,14g 7/16,Painful Pleasures,1,0,0
+,CJ183-MN0064-BZ,Navel Pearl BZ,$30.00,14g 7/16,Painful Pleasures,1,0,0
+,CJ184-MN0087DARKBLUE,Naval Tear Drop BL,$30.00,14g 7/16,Painful Pleasures,1,0,0
+,CJ185-MN0092-CRYSTAL,Navel EXT Diamond,$35.00,14g 7/16,Painful Pleasures,2,0,0
+,CJ186-MN0617-CRYSTAL,Naval Dangle CZ,$30.00,14g 7/16,Painful Pleasures,3,0,0
+,CJ187-MN0934,Navel Blue Flower,$30.00,14g 7/16,Painful Pleasures,1,0,0
+,CJ188-MN1008-CRYSTAL,Naval EXT Prong 13mm CZ,$35.00,14g 7/16,Painful Pleasures,1,0,0
+,CJ189-MN1161-CRYSTAL,Navel E Row of Stones, CL,$35.00,14g 7/16,Painful Pleasures,1,0,0
+,CJ190-MN1532,Eyebrow Retainer Acrylic Soft,$15.00,16g 3/8,Painful Pleasures,4,0,0
+,CJ191-MN1564-AQUA,Naval EXT Squares Aqua,$30.00,14g 3/8,Painful Pleasures,0,0,0
+,CJ192-MN15634-CZ,Naval E Squares CZ,$30.00,14g 3/8,Painful Pleasures,1,0,0
+,CJ193-MN1622,Naval EXT Prong Set CZ w/loop,$35.00,14g 7/16,Painful Pleasures,7,0,0
+,CJ194-UB046-6MM,Straight Barbell Half Ball,$20.00,14g 5/8,Painful Pleasures,2,0,0
+,CJ195-UB135-BLACK,Straight Barbell Single Jewel  Black,$15.00,14g 5/8,Painful Pleasures,2,0,0
+,CJ196-UB135DARKGREEN,Straight Barbell Single Jewel,$15.00,14g 5/8,Painful Pleasures,1,0,0
+,CJ197-UB135-DARKRED,Straight Barbell Single Jewel,$15.00,14G 5/8,Painful Pleasures,1,0,0
+,CJ198-UB135LIGHTBLUE,Straight Barbell Single Jewel,$15.00,14G 5/8,Painful Pleasures,3,0,0
+,CJ199-UB144,Tongue Single Jewel CZ,$30.00,14G 5/8,Painful Pleasures,0,0,0
+,CJ200-UB188,Industrial Single Jewel 14g 1-1/2,$30.00,14g 1-1/2,Painful Pleasures,1,0,0
+,CJ201-UB200,Industrial Single Jewel 14g 1-1/2,$30.00,14G 1-1/2,Painful Pleasures,1,0,0
+,CJ203-UB204,Industrial Single Jewel,$30.00,14G 1-1/2,Painful Pleasures,1,0,0
+,CJ204-UB211,Industrial Black Wave,$30.00,14G 1-1/2,Painful Pleasures,1,0,0
+,CJ205-UB226-DEAL30,Straight Barbell Single Jewel,$15.00,14G 5/8,Painful Pleasures,29,0,0
+,CJ206-UB327-1POINT6,Acrylic Tongue Retainer Clear,$15.00,14g 5/8,Painful Pleasures,9,0,0
+,CJ207-UB328,Acrylic Tongue Retainer Pink,$15.00,14g 5/8,Metal Mafia,5,0,0
+,CJ208-UR196,Crystal Hear Captive Bead Ring,$30.00,14g,Painful Pleasures,3,0,0
+,CJ209-UR260-10MM,Fixed Ball Ring,$15.00,20g 3/8,Painful Pleasures,10,0,0
+,CJ210-UR260-8MM,Fixed Ball Ring,$15.00,20g 5/16,Painful Pleasures,9,0,0
+,CJ211-UR261-10MM,Fixed Bead Ring,$15.00,18g 3/8,Painful Pleasures,10,0,0
+,CJ212-UR261-8MM,Fixed Bead Ring,$15.00,18G 5/16,Painful Pleasures,10,0,0
+,CJ213-UR271-10MM-4MM,Fixed Bead Ring 4mm Ball,$15.00,14G 3/8,Painful Pleasures,10,0,0
+,CJ214-UR272-10MM-4MM,Fixed Bead Ring 4mm Ball,$15.00,16g 3/8,Painful Pleasures,10,0,0
+,CJ215-UR272-8MM-3MM,Fixed Bead Ring,$15.00,16g 5/16,Painful Pleasures,10,0,0
+,CJ216-UR411-8MM BRNZ,Fixed Bead Ring,$25.00,18G 5/16,Painful Pleasures,10,0,0
+,CJ217-UR411-10MMBRNZ,Fixed Bead Ring,$25.00,18G 3/8,Painful Pleasures,10,0,0
+,CJ217-UR431,Silicon Flat Disc 7mm,$10.00,7mm,Painful Pleasures,100,0,0
+,CJ218-BNED147-1658,Naval 5x8mm Double Gem Cl,$25.00,14G 7/16,Metal Mafia,4,0,0
+,CJ218-UR488,Sliver Plated Trquoise Clipon Septum,$30.00,,Painful Pleasures,1,0,0
+,CJ219-BNED147-1658,Naval 5x8mm AB,$25.00,14g 7/16,Metal Mafia,2,0,0
+,CJ220-BNED147-1658,Naval 5x8mm PK,$25.00,14g 7/16,Metal Mafia,2,0,0
+,CJ221-BNED147-1658,Naval 5x8mm AQ,$25.00,14g 7/16,Metal Mafia,2,0,0
+,CJ222-BNED147-16,Naval 5/8xmm BZ,$25.00,14G 7/16,Metal Mafia,2,0,0
+,CJ223-BNED147-16,Naval 5/8xmm DG,$25.00,14G 7/16,Metal Mafia,1,0,0
+,CJ224-BNED147-16,Naval 5/8xmm TZ,$25.00,14G 7/16,Metal Mafia,2,0,0
+,CJ225-BNED147-16,Naval 5/8xmm BK,$25.00,14G 7/16,Metal Mafia,2,0,0
+,CJ226-BNED147-16,Naval 5/8xmm RD,$25.00,14G 7/16,Metal Mafia,2,0,0
+,CJ227-BNED147-16,Naval 5/8xmm RD,$25.00,14G 7/16,Metal Mafia,2,0,0
+,CJ228-BNED147-16,Naval 5/8xmm LG,$25.00,14G 7/16,Metal Mafia,2,0,0
+,CJ229-BNED141-2,Navel 5/8xmm AB,$25.00,14G 1/2,Metal Mafia,2,0,0
+,CJ230-BNED141-2,Naval 5/8xmm PK,$25.00,14G 1/2,Metal Mafia,2,0,0
+,CJ231-BNED141-2,Naval 5/8xmm PK,$25.00,14G 1/2,Metal Mafia,2,0,0
+,CJ232-BNED141-2,Navel 5/8xmm AQ,$25.00,14G 1/2,Metal Mafia,2,0,0
+,CJ233-BNED141-2,Navel 5/8xmm BZ,$25.00,14G 1/2,Metal Mafia,2,0,0
+,CJ234-BNED141-2,Navel 5/8xmm DG,$25.00,14G 1/2,Metal Mafia,2,0,0
+,CJ235-BNED141-2,Navel 5/8xmm DG,$25.00,14G 1/2,Metal Mafia,2,0,0
+,CJ236-BNED141-2,Naval 5/8xmm DG,$25.00,14G 1/2,Metal Mafia,2,0,0
+,CJ238-BNED141-2,Navel 5/8xmm TZ,$25.00,14G 1/2,Metal Mafia,2,0,0
+,CJ239-BNED141-2,Naval 5/8xmm BK,$25.00,14G 1/2,Metal Mafia,2,0,0
+,CJ240-BNED141-2,Navel 5/8xmm RD,$25.00,14G 1/2,Metal Mafia,2,0,0
+,CJ241-BNED141-2,Naval 5/8xmm SP,$25.00,14G 1/2,Metal Mafia,2,0,0
+,CJ242-BNED141-2,Navel 5/8xmm LG,$25.00,14G 1/2,Metal Mafia,2,0,0
+,CJ243-LBE143-84AB,Labret E 4mm AB,$15.00,14g 3/8,Metal Mafia,2,0,0
+,CJ244-LBE143-84PK,Labret E 4mm PK,$15.00,14G 3/8,Metal Mafia,2,0,0
+,CJ245-LBE143-84PK,Labret E 4mm PK,$15.00,14G 3/8,Metal Mafia,2,0,0
+,CJ246-LBE143-84AQ,Labret E 4mm AQ,$15.00,14g 3/8,Metal Mafia,2,0,0
+,CJ247-LBE143-84BZ,Labret E 4mm BZ,$15.00,14g 3/8,Metal Mafia,2,0,0
+,CJ248-LBE143-84DG,Labret E 4mm DG,$15.00,14g 3/8,Metal Mafia,2,0,0
+,CJ250-LBE143-84TZ,Labret E 4mm TZ,$15.00,14g 3/8,Metal Mafia,2,0,0
+,CJ251-LBE143-84BK,Labret E 4mm BK,$15.00,14g 3/8,Metal Mafia,2,0,0
+,CJ252-LBE143-84RD,Labret E 4mm RD,$15.00,14g 3/8,Metal Mafia,2,0,0
+,CJ253-LBE143-84SP,Labret E 4mm SP,$15.00,14g 3/8,Metal Mafia,2,0,0
+,CJ254-LBE143-84LG,Labret E 4mm LG,$15.00,14g 3/8,Metal Mafia,2,0,0
+,CJ255-LBE163-83AB,Labret E 3mm AB,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ257-LBE163-83PK,Labret E 3mm PK,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ258-LBE163-83AQ,Labret E 3mm AQ,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ259-LBE163-83BZ,Labret E 3mm BZ,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ261-LBE163-83DG,Labret E 3mm DG,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ262-LBE163-83TZ,Labret E 3mm TZ,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ263-LBE163-83BK,Labret E 3mm BK,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ264-LBE163-8RD,Labret E 3mm RD,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ265-LBE163-83SP,Labret E 3mm SP,$15.00,16g 3/8,Metal Mafia,2,0,0
+,CJ266-LBE163-83LG,Labret E 3mm LG,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ267-CVED163-83AB,Curved Barbell 3mm AB,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ269-CVED163-83PK,Curved Barbell 3mm PK,$15.00,16g 3/8,Metal Mafia,2,0,0
+,CJ270-CVED163-83AQ,Curved Barbell 3mm AQ,$15.00,16g 3/8,Metal Mafia,2,0,0
+,CJ271-CVED163-83BZ,Curved Barbell 3mm BZ,$15.00,16g 3/8,Metal Mafia,2,0,0
+,CJ272-CVED163-83DG,Curved Barbell 3mm DG,$15.00,16g 3/8,Metal Mafia,2,0,0
+,CJ273-CVED163-83TZ,Curved Barbell 3mm TZ,$15.00,16g 3/8,Metal Mafia,2,0,0
+,CJ274-CVED163-83BK,Curved Barbell 3mm BK,$15.00,16g 3/8,Metal Mafia,2,0,0
+,CJ275-CVED163-83RD,Curved Barbell 3mm RD,$15.00,16g 3/8,Metal Mafia,2,0,0
+,CJ276-CVED163-83SP,Curved Barbell 3mm SP,$15.00,16g 3/8,Metal Mafia,2,0,0
+,CJ277-CVED163-83LG,Curved Barbell 3mm LG,$15.00,16g 3/8,Metal Mafia,2,0,0
+,CJ278-CVED165-163AB,Curved Barbell 3mm AB,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ280-CVED165-163PK,Curved Barbell 3mm PK,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ281-CVED165-163AQ,Curved Barbell 3mm AQ,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ282-CVED165-163BZ,Curved Barbell 3mm BZ,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ283-CVED165-163DG,Curved Barbell 3mm DG,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ284-CVED165-163TZ,Curved Barbell 3mm TZ,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ285-CVED165-163BK,Curved Barbell 3mm BK,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ286-CVED165-163RD,Curved Barbell 3mm RD,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ287-CVED165-163SP,Curved Barbell 3mm SP,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ288-CVED165-163LG,Curved Barbell 3mm LG,$15.00,16g 5/16,Metal Mafia,2,0,0
+,CJ289-BNED143-858,Navel 5x8mm E AB,$25.00,14G 3/8,Metal Mafia,2,0,0
+,CJ290-BNED143-858,Naval 5x8mm E PK,$25.00,14G 3/8,Metal Mafia,2,0,0
+,CJ291-BNED143-858,Navel 5x8mm E AQ,$15.00,14G 3/8,Metal Mafia,2,0,0
+,CJ292-BNED143-858,Naval 5x8mm E BZ,$25.00,14G 3/8,Metal Mafia,2,0,0
+,CJ293-BNED143-858,Naval 5x8mm E BZ,$25.00,14G 3/8,Metal Mafia,2,0,0
+,CJ294-BNED143-858,Naval 5x8mm E DG,$15.00,14G 3/8,Metal Mafia,2,0,0
+,CJ295-BNED143-858,Naval 5x8mm E TZ,$25.00,14G 3/8,Metal Mafia,2,0,0
+,CJ296-BNED143-858,Naval 5x8mm E BK,$25.00,14G 3/8,Metal Mafia,2,0,0
+,CJ297-BNED143-858,Naval 5x8mm E RD,$25.00,14G 3/8,Metal Mafia,2,0,0
+,CJ298-BNED143-858,Naval 5x8mm E SP,$25.00,14g 3/8,Metal Mafia,2,0,0
+,CJ299-BNED143-858,Naval 5x8mm E LG,$25.00,14G 3/8,Metal Mafia,2,0,0
+,CJ300-C141-25,Captive Bead Ring 5mm AB,$15.00,14G 1/2,Metal Mafia,2,0,0
+,CJ301-C141-25,Captive Bead Ring 5mm PK,$15.00,14G 1/2,Metal Mafia,2,0,0
+,CJ302-C141-25,Captive Bead Ring 5mm AQ,$15.00,14G 1/2,Metal Mafia,2,0,0
+,CJ303-C141-25,Captive Bead Ring 5mm BZ,$15.00,14G 1/2,Metal Mafia,2,0,0
+,CJ304-C141-25,Captive Bead Ring 5mm DG,$15.00,14G 1/2,Metal Mafia,1,0,0
+,CJ305-C141-25,Captive Bead Ring 5mm TZ,$15.00,14G 1/2,Metal Mafia,2,0,0
+,CJ306-C141-25,Captive Bead Ring 5mm BK,$15.00,14G 1/2,Metal Mafia,2,0,0
+,CJ307-C141-25,Captive Bead Ring 5mm RD,$15.00,14G 1/2,Metal Mafia,2,0,0
+,CJ308-C141-25,Captive Bead Ring 5mm SP,$15.00,14G 1/2,Metal Mafia,2,0,0
+,CJ309-C141-25,Captive Bead Ring 5mm LG,$15.00,14G 1/2,Metal Mafia,2,0,0
+,CJ310-C163-53,Captive Bead Ring 3mm AB,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ311-C163-83,Captive Bead Ring 3mm PK,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ312-C163-83,Captive Bead Ring 3mm AB,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ313-C163-83,Captive Bead Ring 3mm AQ,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ314-C163-83,Captive Bead Ring 3mm BZ,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ315-C163-83,Captive Bead Ring 3mm DG,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ316-C163-83,Captive Bead Ring 3mm DG??,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ317-C163-83,Captive Bead Ring 3mm TZ,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ318-C163-83,Captive Bead Ring 3mm BK,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ319-C163-83,Captive Bead Ring 3mm RD,$15.00,16G 3/8,Metal Mafia,1,0,0
+,CJ320-C163-83,Captive Bead Ring 3mm SP,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ321-C163-83,Captive Bead Ring 3mm LG,$15.00,16G 3/8,Metal Mafia,2,0,0
+,CJ321-LBE165-163RD,Labret E 3mm RD,$15.00,16g 5/16,Metal Mafia,2,0,0

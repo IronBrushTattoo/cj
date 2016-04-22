@@ -37,7 +37,7 @@ def get_rows(file)
     
     columns = Label.new("#{size[0]}g",
                          "#{size[1]}\"",
-                         row[2].gsub("&", "and").gsub("BZ", "Blue Zircon"),
+                         row[2].gsub("&", "and"),
                          row[1].to_s.split(/-/)[0],
                          row[4].to_s.split(".")[0],
                          row[5],
@@ -93,10 +93,14 @@ def rows_to_tex(file)
     tex_file = "#{row.id}.tex"
     pdf_file = "#{row.id}.pdf"
 
-    unless row.size == "\""
+    if row.size == "\""
+      size = row.gauge
+    elsif row.gauge == ""
+      size = row.size
+    else
       size = "#{row.gauge} #{row.size}"
     else
-      size = "#{row.gauge}"
+      
     end
 
     type = row.desc

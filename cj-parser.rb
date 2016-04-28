@@ -2,6 +2,8 @@
 require 'json'
 require 'chronic'
 require 'rubyXL'
+require 'docx'
+require 'roo'
 
 require './lib/sheets.rb'
 require './lib/label.rb'
@@ -43,19 +45,21 @@ def get_labels(file)
   puts "getting labels"
   
   labels = []
+  
+  xls_file = Roo::Spreadsheet.open(file)
 
-  xls_file = RubyXL::Parser.parse(file)
+  xls_file.sheets.each do |sheet|
 
-  xls_file.worksheets.each do |worksheet|
+    sheet = xls_file.sheet(sheet)
+    
+    sheet.parse[4..-1].each do |row|
 
-    worksheet[4..-1].each do |row|
-
-      zero,one,two,four,five,ten = nil_convert(row[0].value),
-      nil_convert(row[1].value),
-      nil_convert(row[2].value),
-      nil_convert(row[4].value),
-      nil_convert(row[5].value),
-      nil_convert(row[10].value)
+      zero,one,two,four,five,ten = nil_convert(row[0]),
+      nil_convert(row[1]),
+      nil_convert(row[2]),
+      nil_convert(row[4]),
+      nil_convert(row[5]),
+      nil_convert(row[10])
 
       sizes = strip(five.to_s)
       gauge = "#{sizes[0]}g"
@@ -82,13 +86,6 @@ def get_labels(file)
         labels.push label
       end
 
-      #####
-      row && row.cells.each_with_index do |cell, index|
-        val = cell && cell.value
-
-        puts "#{index}: #{val}"
-      end
-      
     end
   end
 
@@ -110,7 +107,7 @@ def get_labels(file)
   #                        row[5],
   #                        updated.to_f
   #                       )
-    
+
   #   unless row[1] == "CASE JEWELRY-CJ"
   #     unless row[1] == "Product ID"
   #       if (Time.now.to_f - updated.to_f) < 60*60*24*$days
@@ -201,11 +198,3 @@ def labels_to_tex(file)
     `pdflatex #{tex_file} && mv *.tex *.aux *.log *.out tmp && mv *.pdf #{$pdf_path}`
   end
 end
-
-cj_file = ARGV[0]
-days = ARGV[1]
-
-set_variables(days)
-Sheets.make_sheets(cj_file)
-
-puts "done!"

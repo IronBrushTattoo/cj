@@ -17,7 +17,7 @@
 
 # TODO <a id="sec-1" name="sec-1"></a>
 
--   [ ] input as xls file
+-   [X] input as xls file
 -   [ ] gui?
     -   [ ] shoes!
 
@@ -25,14 +25,35 @@
 
     require 'cj-parser'
     
-    Shoes.app {
-      background white
-      @push = button "Push me"
-      @note = para "Nothing pushed so far"
-      @push.click {
-        @note.replace "Aha! Click!"
-      }
-    }
+    cj_file = ARGV[0].to_s
+    days = ARGV[1]
+    
+    Shoes.app do
+      background "#efc"
+      border("#be8",
+             strokewidth: 6)
+    
+      stack(margin: 12) do
+        para "Number Days"
+    
+        flow do
+          @days = edit_line
+          @button = button "Submit"
+          @button.click do
+            set_variables(@days.text.to_i)
+          end
+        end
+    
+        flow do
+          @file = edit_line
+          @button = button "Submit"
+          @button.click do
+            #Sheets.make_sheets(@file)    
+            #Sheets.make_sheets(cj_file)    
+          end
+        end
+      end
+    end
 
 # Main<a id="sec-3" name="sec-3"></a>
 
@@ -41,6 +62,8 @@
     require 'json'
     require 'chronic'
     require 'rubyXL'
+    require 'docx'
+    require 'roo'
     
     require './lib/sheets.rb'
     require './lib/label.rb'
@@ -83,18 +106,20 @@
     
       labels = []
     
-      xls_file = RubyXL::Parser.parse(file)
+      xls_file = Roo::Spreadsheet.open(file)
     
-      xls_file.worksheets.each do |worksheet|
+      xls_file.sheets.each do |sheet|
     
-        worksheet[4..-1].each do |row|
+        sheet = xls_file.sheet(sheet)
     
-          zero,one,two,four,five,ten = nil_convert(row[0].value),
-          nil_convert(row[1].value),
-          nil_convert(row[2].value),
-          nil_convert(row[4].value),
-          nil_convert(row[5].value),
-          nil_convert(row[10].value)
+        sheet.parse[4..-1].each do |row|
+    
+          zero,one,two,four,five,ten = nil_convert(row[0]),
+          nil_convert(row[1]),
+          nil_convert(row[2]),
+          nil_convert(row[4]),
+          nil_convert(row[5]),
+          nil_convert(row[10])
     
           sizes = strip(five.to_s)
           gauge = "#{sizes[0]}g"
@@ -119,13 +144,6 @@
           if (Time.now.to_f - updated.to_f) < seconds
             puts label.id
             labels.push label
-          end
-    
-          #####
-          row && row.cells.each_with_index do |cell, index|
-            val = cell && cell.value
-    
-            puts "#{index}: #{val}"
           end
     
         end
@@ -240,14 +258,6 @@
         `pdflatex #{tex_file} && mv *.tex *.aux *.log *.out tmp && mv *.pdf #{$pdf_path}`
       end
     end
-
-    cj_file = ARGV[0]
-    days = ARGV[1]
-    
-    set_variables(days)
-    Sheets.make_sheets(cj_file)
-    
-    puts "done!"
 
 # Classes<a id="sec-4" name="sec-4"></a>
 

@@ -1,4 +1,4 @@
-% Created 2016-04-27 Wed 23:58
+% Created 2016-04-28 Thu 01:27
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -31,7 +31,7 @@
 \label{sec-1}
 
 \begin{itemize}
-\item $\square$ input as xls file
+\item $\boxtimes$ input as xls file
 \item $\square$ gui?
 \begin{itemize}
 \item $\square$ shoes!
@@ -44,14 +44,35 @@
 \begin{verbatim}
 require 'cj-parser'
 
-Shoes.app {
-  background white
-  @push = button "Push me"
-  @note = para "Nothing pushed so far"
-  @push.click {
-    @note.replace "Aha! Click!"
-  }
-}
+cj_file = ARGV[0].to_s
+days = ARGV[1]
+
+Shoes.app do
+  background "#efc"
+  border("#be8",
+         strokewidth: 6)
+
+  stack(margin: 12) do
+    para "Number Days"
+
+    flow do
+      @days = edit_line
+      @button = button "Submit"
+      @button.click do
+        set_variables(@days.text.to_i)
+      end
+    end
+
+    flow do
+      @file = edit_line
+      @button = button "Submit"
+      @button.click do
+        #Sheets.make_sheets(@file)    
+        #Sheets.make_sheets(cj_file)    
+      end
+    end
+  end
+end
 \end{verbatim}
 
 \section{Main}
@@ -63,6 +84,8 @@ Shoes.app {
 require 'json'
 require 'chronic'
 require 'rubyXL'
+require 'docx'
+require 'roo'
 
 require './lib/sheets.rb'
 require './lib/label.rb'
@@ -109,18 +132,20 @@ def get_labels(file)
 
   labels = []
 
-  xls_file = RubyXL::Parser.parse(file)
+  xls_file = Roo::Spreadsheet.open(file)
 
-  xls_file.worksheets.each do |worksheet|
+  xls_file.sheets.each do |sheet|
 
-    worksheet[4..-1].each do |row|
+    sheet = xls_file.sheet(sheet)
 
-      zero,one,two,four,five,ten = nil_convert(row[0].value),
-      nil_convert(row[1].value),
-      nil_convert(row[2].value),
-      nil_convert(row[4].value),
-      nil_convert(row[5].value),
-      nil_convert(row[10].value)
+    sheet.parse[4..-1].each do |row|
+
+      zero,one,two,four,five,ten = nil_convert(row[0]),
+      nil_convert(row[1]),
+      nil_convert(row[2]),
+      nil_convert(row[4]),
+      nil_convert(row[5]),
+      nil_convert(row[10])
 
       sizes = strip(five.to_s)
       gauge = "#{sizes[0]}g"
@@ -145,13 +170,6 @@ def get_labels(file)
       if (Time.now.to_f - updated.to_f) < seconds
         puts label.id
         labels.push label
-      end
-
-      #####
-      row && row.cells.each_with_index do |cell, index|
-        val = cell && cell.value
-
-        puts "#{index}: #{val}"
       end
 
     end
@@ -272,15 +290,6 @@ def labels_to_tex(file)
 end
 \end{verbatim}
 
-\begin{verbatim}
-cj_file = ARGV[0]
-days = ARGV[1]
-
-set_variables(days)
-Sheets.make_sheets(cj_file)
-
-puts "done!"
-\end{verbatim}
 \section{Classes}
 \label{sec-4}
 

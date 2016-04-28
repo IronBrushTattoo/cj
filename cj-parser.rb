@@ -1,60 +1,127 @@
-#!/usr/bin/ruby
 
-require 'csv'
 require 'json'
 require 'chronic'
-require './lib/sheet.rb'
+require 'rubyXL'
+
+require './lib/sheets.rb'
 require './lib/label.rb'
 
 # write to take in xml file
-csv_file = ARGV[0]
-$days = ARGV[1].to_f
+def set_variables(days)
 
-$cj_path = Dir.pwd()
-$pdf_path = "#{$cj_path}/pdfs"
-$templates_path = "#{$cj_path}/lib/templates"
-$template_top = File.open("#{$templates_path}/template-top.txt").readlines
-$template_bottom = File.open("#{$templates_path}/template-bottom.txt").readlines
+  $days = days.to_f
 
-$sheets_dir = "#{$pdf_path}/sheets"
-$labels_dir = "#{$pdf_path}/labels"
-$sheet_top = File.open("#{$templates_path}/labelsTemplate-top.txt").readlines
+  $cj_path = Dir.pwd()
+  $pdf_path = "#{$cj_path}/pdfs"
+  $templates_path = "#{$cj_path}/lib/templates"
+  $template_top = File.open("#{$templates_path}/template-top.txt").readlines
+  $template_bottom = File.open("#{$templates_path}/template-bottom.txt").readlines
 
+  $sheets_dir = "#{$pdf_path}/sheets"
+  $labels_dir = "#{$pdf_path}/labels"
+  $sheet_top = File.open("#{$templates_path}/labelsTemplate-top.txt").readlines
 
-def get_rows(file)
-  puts "getting rows"
+end
+
+def strip(s)
+  s.gsub(/"/, '').
+    gsub(/g/, '').
+    gsub(/G/, '').
+    gsub(/,/, '').
+    split(' ')
+end
+
+def nil_convert(c)
+  if c.nil?
+    ""
+  else
+    c
+  end
+end
+
+def get_labels(file)
+  puts "getting labels"
   
-  rows = []
-  
-  CSV.foreach(
-    file,
-    headers: false,
-    skip_blanks: true,
-    skip_lines: Regexp.union([ /^(?:,\s*)+$/, /^(?:Product)/ ]) ) do |row|
-    
-    size = row[5].to_s.gsub(/"/, '').gsub(/g/, '').gsub(/G/, '').gsub(/,/, '').split(' ')
-    updated = Chronic.parse(row[10])
-    
-    columns = Label.new("#{size[0]}g",
-                         "#{size[1]}\"",
-                         row[2].gsub("&", "and"),
-                         row[1].to_s.split(/-/)[0],
-                         row[4].to_s.split(".")[0],
-                         row[5],
-                         updated.to_f
-                        )
-    
-    unless row[1] == "CASE JEWELRY-CJ"
-      unless row[1] == "Product ID"
-        if (Time.now.to_f - updated.to_f) < 60*60*24*$days
-          puts columns.id
-          rows.push columns
-        end
+  labels = []
+
+  xls_file = RubyXL::Parser.parse(file)
+
+  xls_file.worksheets.each do |worksheet|
+
+    worksheet[4..-1].each do |row|
+
+      zero,one,two,four,five,ten = nil_convert(row[0].value),
+      nil_convert(row[1].value),
+      nil_convert(row[2].value),
+      nil_convert(row[4].value),
+      nil_convert(row[5].value),
+      nil_convert(row[10].value)
+
+      sizes = strip(five.to_s)
+      gauge = "#{sizes[0]}g"
+      size = "#{sizes[1]}\""
+      desc = two.gsub("&", "and")
+      id = one.to_s.split(/-/)[0]
+      price = "$#{four.to_s.split(".")[0]}"
+      supply = five
+      updated = Chronic.parse(ten).to_f
+
+      label = Label.new(gauge,
+                        size,
+                        desc,
+                        id,
+                        price,
+                        supply,
+                        updated
+                       )
+
+      seconds = 60*60*24*$days
+      
+      if (Time.now.to_f - updated.to_f) < seconds
+        puts label.id
+        labels.push label
       end
+
+      #####
+      row && row.cells.each_with_index do |cell, index|
+        val = cell && cell.value
+
+        puts "#{index}: #{val}"
+      end
+      
     end
   end
 
-  return rows
+  # old csv code, keeping around for a rainy day
+  # CSV.foreach(
+  #   file,
+  #   headers: false,
+  #   skip_blanks: true,
+  #   skip_lines: Regexp.union([ /^(?:,\s*)+$/, /^(?:Product)/ ]) ) do |row|
+
+  #   size = row[5].to_s.gsub(/"/, '').gsub(/g/, '').gsub(/G/, '').gsub(/,/, '').split(' ')
+  #   updated = Chronic.parse(row[10])
+
+  #   label = Label.new("#{size[0]}g",
+  #                        "#{size[1]}\"",
+  #                        row[2].gsub("&", "and"),
+  #                        row[1].to_s.split(/-/)[0],
+  #                        row[4].to_s.split(".")[0],
+  #                        row[5],
+  #                        updated.to_f
+  #                       )
+    
+  #   unless row[1] == "CASE JEWELRY-CJ"
+  #     unless row[1] == "Product ID"
+  #       if (Time.now.to_f - updated.to_f) < 60*60*24*$days
+  #         puts label.id
+  #         labels.push label
+  #       end
+  #     end
+  #   end
+  # end
+
+  return labels
 
 end
 
@@ -63,13 +130,13 @@ def rows_to_json(file)
   puts "converting rows to javascript object notation"
 
   json_file = "cj_db.json"
-  count = get_rows(file).size
+  count = get_labels(file).size
 
   File.open(json_file, "w") do |file|
     file.puts '{ "products": ['
   end
   
-  get_rows(file).each_with_index do |row, index|
+  get_labels(file).each_with_index do |row, index|
     File.open(json_file, "a") do |json|
       json.puts row.to_json
 
@@ -84,9 +151,9 @@ def rows_to_json(file)
   end
 end
 
-def rows_to_tex(file)
+def labels_to_tex(file)
 
-  get_rows(file).each do |row|
+  get_labels(file).each do |row|
 
     puts row.id
     
@@ -99,8 +166,6 @@ def rows_to_tex(file)
       size = row.size
     else
       size = "#{row.gauge} #{row.size}"
-    else
-      
     end
 
     type = row.desc
@@ -137,6 +202,10 @@ def rows_to_tex(file)
   end
 end
 
-Sheets.make_sheets(csv_file)
+cj_file = ARGV[0]
+days = ARGV[1]
+
+set_variables(days)
+Sheets.make_sheets(cj_file)
 
 puts "done!"

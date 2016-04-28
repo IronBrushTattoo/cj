@@ -12,7 +12,7 @@ require './lib/label.rb'
 def set_variables(days)
 
   $days = days.to_f
-
+  
   $cj_path = Dir.pwd()
   $pdf_path = "#{$cj_path}/pdfs"
   $templates_path = "#{$cj_path}/lib/templates"
@@ -83,6 +83,7 @@ def get_labels(file)
       
       if (Time.now.to_f - updated.to_f) < seconds
         puts label.id
+        $labelID = label.id
         labels.push label
       end
 

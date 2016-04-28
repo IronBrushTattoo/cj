@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>README</title>
-<!-- 2016-04-28 Thu 01:27 -->
+<!-- 2016-04-28 Thu 10:30 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <style type="text/css">
@@ -179,32 +179,55 @@ for the JavaScript code in this tag.
 cj_file = ARGV[0].to_s
 days = ARGV[1]
 
-Shoes.app do
-  background "#efc"
-  border("#be8",
-         strokewidth: 6)
+
+Shoes.app(title: "Case Jewelry Label Maker", width: 800, height: 1000, resizable: true) {
+  background "#c3f4f8".."#fff"
+  fill white
+  border("#fff",
+         strokewidth: 4)
 
   stack(margin: 12) do
-    para "Number Days"
+    para "Number of Days"
+    flow {
+      #@days = edit_line :width =&gt; 50
+      @days_para = para "0"
 
-    flow do
-      @days = edit_line
-      @button = button "Submit"
-      @button.click do
-        set_variables(@days.text.to_i)
+      button "Choose File" do
+        @file = ask_open_file
       end
-    end
 
-    flow do
-      @file = edit_line
-      @button = button "Submit"
-      @button.click do
-        #Sheets.make_sheets(@file)    
-        #Sheets.make_sheets(cj_file)    
+      button "#{@days_para} Days" do
+        @days = ask("How many days back?")
+        #animate do
+          @days_para.replace "#{@days}"
+        #end
       end
-    end
+
+      button "Submit" do
+        #alert "Making sheets from #{@file} from last #{@days.text} days"
+        #alert "Making sheets from #{@file} from last #{@days} days"
+        #set_variables(@days.text)
+
+        if confirm("Make sheets from #{@file} from last #{@days} days?")
+          set_variables(@days)
+          Sheets.make_sheets(@file)
+        end
+      end
+
+      button "X" do
+        exit()
+      end
+    }
+
+    @sheet = image(
+      #"img/label.png",
+      "img/sheet.png",
+      width: 850,
+      height: 1100
+    )
+
   end
-end
+}
 </pre>
 </div>
 </div>
@@ -311,6 +334,7 @@ def get_labels(file)
 
       if (Time.now.to_f - updated.to_f) &lt; seconds
         puts label.id
+        $labelID = label.id
         labels.push label
       end
 

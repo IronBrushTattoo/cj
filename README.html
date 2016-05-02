@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>README</title>
-<!-- 2016-04-28 Thu 10:30 -->
+<!-- 2016-05-02 Mon 08:07 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <style type="text/css">
@@ -142,12 +142,33 @@ for the JavaScript code in this tag.
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">1. <span class="todo TODO">TODO</span> </a></li>
-<li><a href="#sec-2">2. Shoes</a></li>
-<li><a href="#sec-3">3. Main</a></li>
-<li><a href="#sec-4">4. Classes</a></li>
-<li><a href="#sec-5">5. Modules</a>
+<li><a href="#sec-2">2. Packaging</a>
 <ul>
-<li><a href="#sec-5-1">5.1. Sheets</a></li>
+<li><a href="#sec-2-1">2.1. Traveling Ruby</a>
+<ul>
+<li><a href="#sec-2-1-1">2.1.1. Preparation</a></li>
+<li><a href="#sec-2-1-2">2.1.2. Creating a batch file</a></li>
+<li><a href="#sec-2-1-3">2.1.3. Modifying the Rakefile</a></li>
+<li><a href="#sec-2-1-4">2.1.4. Creating and testing the package</a></li>
+<li><a href="#sec-2-1-5">2.1.5. NB</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Shoes</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Issues</a>
+<ul>
+<li><a href="#sec-3-1-1">3.1.1. Packaging</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Main</a></li>
+<li><a href="#sec-5">5. Classes</a></li>
+<li><a href="#sec-6">6. Modules</a>
+<ul>
+<li><a href="#sec-6-1">6.1. Sheets</a></li>
 </ul>
 </li>
 </ul>
@@ -169,38 +190,366 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
+
 <div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Shoes</h2>
+<h2 id="sec-2"><span class="section-number-2">2</span> Packaging</h2>
 <div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Traveling Ruby</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Tutorial 4: creating packages for Windows
+</p>
+
+<p>
+<a href="https://github.com/phusion/traveling-ruby/blob/master/TUTORIAL-4.md">https://github.com/phusion/traveling-ruby/blob/master/TUTORIAL-4.md</a>
+</p>
+
+<p>
+<a href="./packages/traveling-ruby/README.html">./packages/traveling-ruby/README.html</a>
+</p>
+</div>
+
+<div id="outline-container-sec-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span> Preparation</h4>
+<div class="outline-text-4" id="text-2-1-1">
 <div class="org-src-container">
 
-<pre class="src src-ruby">require 'cj-parser'
+<pre class="src src-sh" id="ruby-version">rbenv local 2.1.9
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-sh" id="make-packaging-directory">mkdir packaging
+</pre>
+</div>
+
+<p>
+<a href="./Gemfile">./Gemfile</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-ruby" id="Gemfile">source 'https://rubygems.org'
+
+gem 'faker'
+gem 'sqlite3', '1.3.9'
+
+group :development do
+  gem 'rake'
+end
+</pre>
+</div>
+
+<p>
+<a href="./hello.rb">./hello.rb</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-ruby" id="hello.rb">#!/usr/bin/env ruby
+require 'faker'
+require 'sqlite3'
+
+db = SQLite3::Database.new("hello.sqlite3")
+db.execute("create table if not exists foo (name varchar(255))")
+db.execute("insert into foo values ('hello world')")
+db.close
+puts "Hello #{Faker::Name.name}, database file modified."
+</pre>
+</div>
+
+<p>
+<a href="./packaging/wrapper.sh">./packaging/wrapper.sh</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh" id="wrapper.sh">#!/bin/bash
+set -e
+
+# Figure out where this script is located
+SELFDIR="`dirname \"$0\"`"
+SELFDIR="`cd \"$SELFDIR\" &amp;&amp; pwd`"
+
+# Tell Bundler where the Gemfile and gems are.
+export BUNDLE_GEMFILE="$SELFDIR/lib/vendor/Gemfile"
+unset BUNDLE_IGNORE_CONFIG
+
+# Run the actual app using the bundled Ruby interpreter, with Bundler activated.
+exec "$SELFDIR/lib/ruby/bin/ruby" -r bundler/setup "$SELFDIR/lib/app/hello.rb"
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-sh" id="make-wrapper-executable">chmod +x packaging/wrapper.sh
+</pre>
+</div>
+
+<p>
+<a href="./packaging/bundler-config">./packaging/bundler-config</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-ruby">BUNDLE_PATH: .
+BUNDLE_WITHOUT: development
+BUNDLE_DISABLE_SHARED_GEMS: '1'
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-sh" id="bundle-install">bundle install
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-1-2" class="outline-4">
+<h4 id="sec-2-1-2"><span class="section-number-4">2.1.2</span> Creating a batch file</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<p>
+<a href="./packaging/wrapper.bat">./packaging/wrapper.bat</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-text">@echo off
+
+:: Tell Bundler where the Gemfile and gems are.
+set "BUNDLE_GEMFILE=%~dp0\lib\vendor\Gemfile"
+set BUNDLE_IGNORE_CONFIG=
+
+:: Run the actual app using the bundled Ruby Interpreter, with Bundler activated.
+@"%~dp0\lib\ruby\bin\ruby.bat" -rbundler/setup "%~dp0\lib\app\hello.rb"
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-1-3" class="outline-4">
+<h4 id="sec-2-1-3"><span class="section-number-4">2.1.3</span> Modifying the Rakefile</h4>
+<div class="outline-text-4" id="text-2-1-3">
+<p>
+<a href="./Rakefile">./Rakefile</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-ruby" id="Rakefile"># For Bundler.with_clean_env
+require 'bundler/setup'
+
+PACKAGE_NAME = "hello"
+VERSION = "1.0.0"
+TRAVELING_RUBY_VERSION = "20150210-2.1.5"
+SQLITE3_VERSION = "1.3.9"  # Must match Gemfile
+
+desc "Package your app"
+task :package =&gt; ['package:linux:x86', 'package:linux:x86_64', 'package:osx', 'package:win32']
+
+namespace :package do
+  namespace :linux do
+    desc "Package your app for Linux x86"
+    task :x86 =&gt; [:bundle_install,
+                  "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-linux-x86.tar.gz",
+                  "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-linux-x86-sqlite3-#{SQLITE3_VERSION}.tar.gz"
+    ] do
+      create_package("linux-x86")
+    end
+
+    desc "Package your app for Linux x86_64"
+    task :x86_64 =&gt; [:bundle_install,
+      "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-linux-x86_64.tar.gz",
+      "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-linux-x86_64-sqlite3-#{SQLITE3_VERSION}.tar.gz"
+    ] do
+      create_package("linux-x86_64")
+    end
+  end
+
+  desc "Package your app for OS X"
+  task :osx =&gt; [:bundle_install,
+                "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-osx.tar.gz",
+                "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-osx-sqlite3-#{SQLITE3_VERSION}.tar.gz"
+               ] do
+    create_package("osx")
+  end
+
+  desc "Package your app for Windows x86"
+  task :win32 =&gt; [:bundle_install,
+                  "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-win32.tar.gz"#,
+                  #"packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-win32-sqlite3-#{SQLITE3_VERSION}.tar.gz"
+                 ] do
+    create_package("win32", :windows)
+  end
+
+  desc "Install gems to local directory"
+  task :bundle_install do
+    if RUBY_VERSION !~ /^2\.1\./
+      abort "You can only 'bundle install' using Ruby 2.1, because that's what Traveling Ruby uses."
+    end
+    sh "rm -rf packaging/tmp"
+    sh "mkdir packaging/tmp"
+    sh "cp Gemfile Gemfile.lock packaging/tmp/"
+    Bundler.with_clean_env do
+      sh "cd packaging/tmp &amp;&amp; env BUNDLE_IGNORE_CONFIG=1 bundle install --path ../vendor --without development"
+    end
+    sh "rm -rf packaging/tmp"
+    sh "rm -f packaging/vendor/*/*/cache/*"
+    sh "rm -rf packaging/vendor/ruby/*/extensions"
+    sh "find packaging/vendor/ruby/*/gems -name '*.so' | xargs rm -f"
+    sh "find packaging/vendor/ruby/*/gems -name '*.bundle' | xargs rm -f"
+    sh "find packaging/vendor/ruby/*/gems -name '*.o' | xargs rm -f"
+  end
+end
+
+file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-linux-x86.tar.gz" do
+  download_runtime("linux-x86")
+end
+
+file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-linux-x86_64.tar.gz" do
+  download_runtime("linux-x86_64")
+end
+
+file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-osx.tar.gz" do
+  download_runtime("osx")
+end
+
+# file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-win32-sqlite3-#{SQLITE3_VERSION}.tar.gz" do
+#   download_runtime("win32", "sqlite3-#{SQLITE3_VERSION}")
+# end
+
+file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-win32.tar.gz" do
+  download_runtime("win32")
+end
+
+file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-linux-x86-sqlite3-#{SQLITE3_VERSION}.tar.gz" do
+  download_native_extension("linux-x86", "sqlite3-#{SQLITE3_VERSION}")
+end
+
+file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-linux-x86_64-sqlite3-#{SQLITE3_VERSION}.tar.gz" do
+  download_native_extension("linux-x86_64", "sqlite3-#{SQLITE3_VERSION}")
+end
+
+file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-osx-sqlite3-#{SQLITE3_VERSION}.tar.gz" do
+  download_native_extension("osx", "sqlite3-#{SQLITE3_VERSION}")
+end
+
+def create_package(target, os_type = :unix)
+  package_dir = "#{PACKAGE_NAME}-#{VERSION}-#{target}"
+  sh "rm -rf #{package_dir}"
+  sh "mkdir #{package_dir}"
+  sh "mkdir -p #{package_dir}/lib/app"
+  sh "cp hello.rb #{package_dir}/lib/app/"
+  sh "mkdir #{package_dir}/lib/ruby"
+  sh "tar -xzf packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-#{target}.tar.gz -C #{package_dir}/lib/ruby"
+
+  if os_type == :unix
+    sh "cp packaging/wrapper.sh #{package_dir}/hello"
+  else
+    sh "cp packaging/wrapper.bat #{package_dir}/hello.bat"
+  end
+
+  sh "cp -pR packaging/vendor #{package_dir}/lib/"
+  sh "cp Gemfile Gemfile.lock #{package_dir}/lib/vendor/"
+  sh "mkdir #{package_dir}/lib/vendor/.bundle"
+  sh "cp packaging/bundler-config #{package_dir}/lib/vendor/.bundle/config"
+  if os_type == :unix
+    sh "tar -xzf packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-#{target}-sqlite3-#{SQLITE3_VERSION}.tar.gz " + "-C #{package_dir}/lib/vendor/ruby"
+  else
+    sh "tar -xzf packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-#{target}.tar.gz " + "-C #{package_dir}/lib/vendor/ruby"
+  end
+  if !ENV['DIR_ONLY']
+    if os_type == :unix
+      sh "tar -czf #{package_dir}.tar.gz #{package_dir}"
+    else
+      sh "zip -9r #{package_dir}.zip #{package_dir}"
+    end
+    sh "rm -rf #{package_dir}"
+  end
+end
+
+def download_runtime(target, gem_name_and_version)
+  sh "cd packaging &amp;&amp; curl -L -O --fail " +
+    "https://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-#{TRAVELING_RUBY_VERSION}-#{target}.tar.gz"
+end
+
+def download_native_extension(target, gem_name_and_version)
+  sh "curl -L --fail -o packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-#{target}-#{gem_name_and_version}.tar.gz " +
+    "https://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-gems-#{TRAVELING_RUBY_VERSION}-#{target}/#{gem_name_and_version}.tar.gz"
+end
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-1-4" class="outline-4">
+<h4 id="sec-2-1-4"><span class="section-number-4">2.1.4</span> Creating and testing the package</h4>
+<div class="outline-text-4" id="text-2-1-4">
+<div class="org-src-container">
+
+<pre class="src src-sh" id="rake-package:win32">rake package:win32
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-1-5" class="outline-4">
+<h4 id="sec-2-1-5"><span class="section-number-4">2.1.5</span> NB</h4>
+<div class="outline-text-4" id="text-2-1-5">
+<p>
+<a href="https://github.com/phusion/traveling-ruby/blob/master/README.md#caveats">important Windows-specific caveats</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Shoes</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<a href="./little.rb">./little.rb</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-ruby" id="DEPRECATED">require 'cj-parser'
 
 cj_file = ARGV[0].to_s
 days = ARGV[1]
 
 
 Shoes.app(title: "Case Jewelry Label Maker", width: 800, height: 1000, resizable: true) {
-  background "#c3f4f8".."#fff"
-  fill white
-  border("#fff",
-         strokewidth: 4)
+  #background "#c3f4f8".."#fff"
+  #background "#000"
+  background "img/sheet.png"
+
+  @days_display = stack(margin: 12) do
+    @days_para = para strong("0")
+
+    @days_para
+  end
 
   stack(margin: 12) do
     para "Number of Days"
     flow {
       #@days = edit_line :width =&gt; 50
-      @days_para = para "0"
 
       button "Choose File" do
         @file = ask_open_file
       end
 
-      button "#{@days_para} Days" do
+      @days_button = button "Days" do
         @days = ask("How many days back?")
-        #animate do
-          @days_para.replace "#{@days}"
-        #end
+        @days_display.clear do
+          @days_para = para strong(@days)
+
+          @days_para
+        end
       end
 
       button "Submit" do
@@ -219,23 +568,216 @@ Shoes.app(title: "Case Jewelry Label Maker", width: 800, height: 1000, resizable
       end
     }
 
-    @sheet = image(
-      #"img/label.png",
-      "img/sheet.png",
-      width: 850,
-      height: 1100
-    )
+    # @sheet = image(
+    #   #"img/label.png",
+    #   "img/sheet.png",
+    #   width: 850,
+    #   height: 1100
+    # )
 
   end
 }
 </pre>
 </div>
 </div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Issues</h3>
+<div class="outline-text-3" id="text-3-1">
+</div><div id="outline-container-sec-3-1-1" class="outline-4">
+<h4 id="sec-3-1-1"><span class="section-number-4">3.1.1</span> Packaging</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<ul class="org-ul">
+<li>Mon May  2 02:59:40 CDT 2016
+
+<ul class="org-ul">
+<li>try
+
+<p>
+<a href="https://github.com/phusion/traveling-ruby">https://github.com/phusion/traveling-ruby</a>
+</p>
+
+<ul class="org-ul">
+<li>tutorial 1: hello world
+
+<p>
+<a href="file:///home/son/bin/Ruby/TravelingRuby/hello_app/README.html">file:///home/son/bin/Ruby/TravelingRuby/hello_app/README.html</a>
+</p>
+</li>
+
+<li>tutorial 2: gem dependencies
+
+<p>
+<a href="file:///home/son/bin/Ruby/TravelingRuby/hello_app_with_gem_dependencies/README.html">file:///home/son/bin/Ruby/TravelingRuby/hello_app_with_gem_dependencies/README.html</a>
+</p>
+</li>
+
+<li>tutorial 3: native extensions
+
+<p>
+<a href="file:///home/son/bin/Ruby/TravelingRuby/hello_app_with_native_extensions/README.html">file:///home/son/bin/Ruby/TravelingRuby/hello_app_with_native_extensions/README.html</a>
+</p>
+</li>
+
+<li>tutorial 4: windows
+
+<p>
+<a href="file:///home/son/bin/Ruby/TravelingRuby/hello_app_windows/README.html">file:///home/son/bin/Ruby/TravelingRuby/hello_app_windows/README.html</a>
+</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+<li>Mon May  2 01:35:24 CDT 2016
+
+<pre class="example">
+cd src
+gem install warbler
+shoes -p swt:jar little.rb
+</pre>
+
+<pre class="example">
+Packaging swt:jar...
+Furoshiki::ConfigurationError: Invalid configuration.
+ - Run file configured as 'bin/hello_from_warbler', \
+   but couldn't find file at bin/hello_from_warbler
+ - OS X icon file configured as 'static/Shoes.icns', \
+but couldn't find file at static/Shoes.icns
+</pre>
+
+<pre class="example">
+initialize at /home/son/.rbenv/versions/jruby-9.0.5.0/lib/ruby/gems/shared/gems/furoshiki-0.3.1/lib/furoshiki/jar.rb:11
+create_packager at /home/son/.rbenv/versions/jruby-9.0.5.0/lib/ruby/gems/shared/gems/shoes-swt-4.0.0.pre5/lib/shoes/swt/packager.rb:74
+block in run at /home/son/.rbenv/versions/jruby-9.0.5.0/lib/ruby/gems/shared/gems/shoes-swt-4.0.0.pre5/lib/shoes/swt/packager.rb:28
+each at org/jruby/RubyArray.java:1560
+run at /home/son/.rbenv/versions/jruby-9.0.5.0/lib/ruby/gems/shared/gems/shoes-swt-4.0.0.pre5/lib/shoes/swt/packager.rb:25
+run at /home/son/.rbenv/versions/jruby-9.0.5.0/lib/ruby/gems/shared/gems/shoes-core-4.0.0.pre5/lib/shoes/packager.rb:24
+run at /home/son/.rbenv/versions/jruby-9.0.5.0/lib/ruby/gems/shared/gems/shoes-core-4.0.0.pre5/lib/shoes/ui/cli.rb:70
+&lt;top&gt; at /home/son/.rbenv/versions/jruby-9.0.5.0/lib/ruby/gems/shared/gems/shoes-swt-4.0.0.pre5/bin/shoes-swt:11
+load at org/jruby/RubyKernel.java:955
+&lt;top&gt; at /home/son/.rbenv/versions/jruby-9.0.5.0/bin/shoes-swt:23
+</pre>
+
+<ul class="org-ul">
+<li>breakdown
+
+<pre class="example">
+Packaging swt:jar...
+</pre>
+
+<pre class="example">
+Furoshiki::ConfigurationError: 
+</pre>
+
+<pre class="example">
+Invalid configuration.
+ - Run file configured as 'bin/hello_from_warbler', \
+   but 
+</pre>
+
+<pre class="example">
+couldn't find file at bin/hello_from_warbler
+</pre>
+
+<pre class="example">
+ - OS X icon file configured as 'static/Shoes.icns', \
+but couldn't find file at static/Shoes.icns
+</pre>
+
+<ul class="org-ul">
+<li>remove app.yaml
+
+<pre class="example">
+Packaging swt:jar...
+NameError: uninitialized constant Bundler
+          const_missing at org/jruby/RubyModule.java:3212
+</pre>
+
+<ul class="org-ul">
+<li><a href="https://github.com/shoes/shoes4/issues/1148">https://github.com/shoes/shoes4/issues/1148</a>
+
+<p>
+<a href="./src/Gemfile">./src/Gemfile</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-ruby">source 'https://rubygems.org'
+
+gem 'shoes', '4.0.0.pre5'
+gem 'shoes-swt'
+gem 'warbler'
+</pre>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> Main</h2>
-<div class="outline-text-2" id="text-3">
+<pre class="example">
+bundle
+</pre>
+
+<pre class="example">
+shoes -p swt:jar little.rb
+java -jar little.rb
+</pre>
+
+<pre class="example">
+Ignoring shoes-core-4.0.0.pre5 because its extensions are not \
+ built.  Try: gem pristine shoes-core --version 4.0.0.pre5
+LoadError: no such file to load -- shoes
+  require at org/jruby/RubyKernel.java:1040
+  require at /tmp/jruby6735080100235658419extract/jruby-stdlib-1.7.25.jar!/META-INF/jruby.home/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:54
+   (root) at file:/home/son/IBT/jewelry/Retail_Jewelry/src/pkg/little.jar!/META-INF/init.rb:8
+  require at org/jruby/RubyKernel.java:1040
+   (root) at /tmp/jruby6735080100235658419extract/jruby-stdlib-1.7.25.jar!/META-INF/jruby.home/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1
+  require at /tmp/jruby6735080100235658419extract/jruby-stdlib-1.7.25.jar!/META-INF/jruby.home/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:54
+ERROR: org.jruby.embed.EvalFailedException: (LoadError) no such file to load -- shoes
+</pre>
+
+<ul class="org-ul">
+<li>Dec 14, 2015 : last message at <a href="https://github.com/shoes/shoes4/issues/1148">https://github.com/shoes/shoes4/issues/1148</a>
+</li>
+
+<li>Source <a href="https://github.com/davorb/shoes4">https://github.com/davorb/shoes4</a>
+
+<ul class="org-ul">
+<li>fork it, let's do this!
+
+<p>
+<a href="https://github.com/son1112/shoes4">https://github.com/son1112/shoes4</a>
+</p>
+
+<pre class="example">
+git clone git@github.com:son1112/shoes4.git
+</pre>
+
+<p>
+<a href="file:///home/son/src/shoes4-fork">file:///home/son/src/shoes4-fork</a>
+</p>
+
+<pre class="example">
+haha, should call it shoes4rk
+</pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Main</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 <a href="./cj-parser.rb">./cj-parser.rb</a>
 </p>
@@ -463,9 +1005,9 @@ end
 </div>
 </div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Classes</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Classes</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 <a href="./lib/label.rb">./lib/label.rb</a>
 </p>
@@ -493,12 +1035,12 @@ end
 </div>
 </div>
 
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Modules</h2>
-<div class="outline-text-2" id="text-5">
-</div><div id="outline-container-sec-5-1" class="outline-3">
-<h3 id="sec-5-1"><span class="section-number-3">5.1</span> Sheets</h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Modules</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Sheets</h3>
+<div class="outline-text-3" id="text-6-1">
 <p>
 <a href="./lib/sheets.rb">./lib/sheets.rb</a>
 </p>

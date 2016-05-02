@@ -1,0 +1,77 @@
+% Created 2016-01-13 Wed 19:32
+\documentclass[8pt]{article}
+\usepackage{blindtext}
+\usepackage{framed}
+\usepackage[paperheight=11in,paperwidth=8.5in,margin=0in,top=0.5in,left=0.125in]{geometry}
+\thispagestyle{empty}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{pdfpages}
+\tolerance=1000
+\date{\today}
+\title{}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\begin{center}
+  \setlength{\fboxsep}{1pt}
+  \setlength{\fboxrule}{0.1pt}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \newline
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \newline
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \newline
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \newline
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \newline
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \newline
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \newline
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \framebox[1.0\width]{\includegraphics{test.pdf}}
+  \newline
+\end{center}
+
+\end{document}

@@ -3,12 +3,33 @@
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">1. <span class="todo TODO">TODO</span> </a></li>
-<li><a href="#sec-2">2. Shoes</a></li>
-<li><a href="#sec-3">3. Main</a></li>
-<li><a href="#sec-4">4. Classes</a></li>
-<li><a href="#sec-5">5. Modules</a>
+<li><a href="#sec-2">2. Packaging</a>
 <ul>
-<li><a href="#sec-5-1">5.1. Sheets</a></li>
+<li><a href="#sec-2-1">2.1. Traveling Ruby</a>
+<ul>
+<li><a href="#sec-2-1-1">2.1.1. Preparation</a></li>
+<li><a href="#sec-2-1-2">2.1.2. Creating a batch file</a></li>
+<li><a href="#sec-2-1-3">2.1.3. Modifying the Rakefile</a></li>
+<li><a href="#sec-2-1-4">2.1.4. Creating and testing the package</a></li>
+<li><a href="#sec-2-1-5">2.1.5. NB</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Shoes</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Issues</a>
+<ul>
+<li><a href="#sec-3-1-1">3.1.1. Packaging</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Main</a></li>
+<li><a href="#sec-5">5. Classes</a></li>
+<li><a href="#sec-6">6. Modules</a>
+<ul>
+<li><a href="#sec-6-1">6.1. Sheets</a></li>
 </ul>
 </li>
 </ul>
@@ -21,7 +42,241 @@
 -   [ ] gui?
     -   [ ] shoes!
 
-# Shoes<a id="sec-2" name="sec-2"></a>
+# Packaging<a id="sec-2" name="sec-2"></a>
+
+## Traveling Ruby<a id="sec-2-1" name="sec-2-1"></a>
+
+Tutorial 4: creating packages for Windows
+
+<https://github.com/phusion/traveling-ruby/blob/master/TUTORIAL-4.md>
+
+<./packages/traveling-ruby/README.md>
+
+### Preparation<a id="sec-2-1-1" name="sec-2-1-1"></a>
+
+    rbenv local 2.1.9
+
+    mkdir packaging
+
+<./Gemfile>
+
+    source 'https://rubygems.org'
+    
+    gem 'faker'
+    gem 'sqlite3', '1.3.9'
+    
+    group :development do
+      gem 'rake'
+    end
+
+<./hello.rb>
+
+    #!/usr/bin/env ruby
+    require 'faker'
+    require 'sqlite3'
+    
+    db = SQLite3::Database.new("hello.sqlite3")
+    db.execute("create table if not exists foo (name varchar(255))")
+    db.execute("insert into foo values ('hello world')")
+    db.close
+    puts "Hello #{Faker::Name.name}, database file modified."
+
+<./packaging/wrapper.sh>
+
+    #!/bin/bash
+    set -e
+    
+    # Figure out where this script is located
+    SELFDIR="`dirname \"$0\"`"
+    SELFDIR="`cd \"$SELFDIR\" && pwd`"
+    
+    # Tell Bundler where the Gemfile and gems are.
+    export BUNDLE_GEMFILE="$SELFDIR/lib/vendor/Gemfile"
+    unset BUNDLE_IGNORE_CONFIG
+    
+    # Run the actual app using the bundled Ruby interpreter, with Bundler activated.
+    exec "$SELFDIR/lib/ruby/bin/ruby" -r bundler/setup "$SELFDIR/lib/app/hello.rb"
+
+    chmod +x packaging/wrapper.sh
+
+<./packaging/bundler-config>
+
+    BUNDLE_PATH: .
+    BUNDLE_WITHOUT: development
+    BUNDLE_DISABLE_SHARED_GEMS: '1'
+
+    bundle install
+
+### Creating a batch file<a id="sec-2-1-2" name="sec-2-1-2"></a>
+
+<./packaging/wrapper.bat>
+
+    @echo off
+    
+    :: Tell Bundler where the Gemfile and gems are.
+    set "BUNDLE_GEMFILE=%~dp0\lib\vendor\Gemfile"
+    set BUNDLE_IGNORE_CONFIG=
+    
+    :: Run the actual app using the bundled Ruby Interpreter, with Bundler activated.
+    @"%~dp0\lib\ruby\bin\ruby.bat" -rbundler/setup "%~dp0\lib\app\hello.rb"
+
+### Modifying the Rakefile<a id="sec-2-1-3" name="sec-2-1-3"></a>
+
+<./Rakefile>
+
+    # For Bundler.with_clean_env
+    require 'bundler/setup'
+    
+    PACKAGE_NAME = "hello"
+    VERSION = "1.0.0"
+    TRAVELING_RUBY_VERSION = "20150210-2.1.5"
+    SQLITE3_VERSION = "1.3.9"  # Must match Gemfile
+    
+    desc "Package your app"
+    task :package => ['package:linux:x86', 'package:linux:x86_64', 'package:osx', 'package:win32']
+    
+    namespace :package do
+      namespace :linux do
+        desc "Package your app for Linux x86"
+        task :x86 => [:bundle_install,
+                      "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-linux-x86.tar.gz",
+                      "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-linux-x86-sqlite3-#{SQLITE3_VERSION}.tar.gz"
+        ] do
+          create_package("linux-x86")
+        end
+    
+        desc "Package your app for Linux x86_64"
+        task :x86_64 => [:bundle_install,
+          "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-linux-x86_64.tar.gz",
+          "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-linux-x86_64-sqlite3-#{SQLITE3_VERSION}.tar.gz"
+        ] do
+          create_package("linux-x86_64")
+        end
+      end
+    
+      desc "Package your app for OS X"
+      task :osx => [:bundle_install,
+                    "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-osx.tar.gz",
+                    "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-osx-sqlite3-#{SQLITE3_VERSION}.tar.gz"
+                   ] do
+        create_package("osx")
+      end
+    
+      desc "Package your app for Windows x86"
+      task :win32 => [:bundle_install,
+                      "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-win32.tar.gz"#,
+                      #"packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-win32-sqlite3-#{SQLITE3_VERSION}.tar.gz"
+                     ] do
+        create_package("win32", :windows)
+      end
+    
+      desc "Install gems to local directory"
+      task :bundle_install do
+        if RUBY_VERSION !~ /^2\.1\./
+          abort "You can only 'bundle install' using Ruby 2.1, because that's what Traveling Ruby uses."
+        end
+        sh "rm -rf packaging/tmp"
+        sh "mkdir packaging/tmp"
+        sh "cp Gemfile Gemfile.lock packaging/tmp/"
+        Bundler.with_clean_env do
+          sh "cd packaging/tmp && env BUNDLE_IGNORE_CONFIG=1 bundle install --path ../vendor --without development"
+        end
+        sh "rm -rf packaging/tmp"
+        sh "rm -f packaging/vendor/*/*/cache/*"
+        sh "rm -rf packaging/vendor/ruby/*/extensions"
+        sh "find packaging/vendor/ruby/*/gems -name '*.so' | xargs rm -f"
+        sh "find packaging/vendor/ruby/*/gems -name '*.bundle' | xargs rm -f"
+        sh "find packaging/vendor/ruby/*/gems -name '*.o' | xargs rm -f"
+      end
+    end
+    
+    file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-linux-x86.tar.gz" do
+      download_runtime("linux-x86")
+    end
+    
+    file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-linux-x86_64.tar.gz" do
+      download_runtime("linux-x86_64")
+    end
+    
+    file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-osx.tar.gz" do
+      download_runtime("osx")
+    end
+    
+    # file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-win32-sqlite3-#{SQLITE3_VERSION}.tar.gz" do
+    #   download_runtime("win32", "sqlite3-#{SQLITE3_VERSION}")
+    # end
+    
+    file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-win32.tar.gz" do
+      download_runtime("win32")
+    end
+    
+    file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-linux-x86-sqlite3-#{SQLITE3_VERSION}.tar.gz" do
+      download_native_extension("linux-x86", "sqlite3-#{SQLITE3_VERSION}")
+    end
+    
+    file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-linux-x86_64-sqlite3-#{SQLITE3_VERSION}.tar.gz" do
+      download_native_extension("linux-x86_64", "sqlite3-#{SQLITE3_VERSION}")
+    end
+    
+    file "packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-osx-sqlite3-#{SQLITE3_VERSION}.tar.gz" do
+      download_native_extension("osx", "sqlite3-#{SQLITE3_VERSION}")
+    end
+    
+    def create_package(target, os_type = :unix)
+      package_dir = "#{PACKAGE_NAME}-#{VERSION}-#{target}"
+      sh "rm -rf #{package_dir}"
+      sh "mkdir #{package_dir}"
+      sh "mkdir -p #{package_dir}/lib/app"
+      sh "cp hello.rb #{package_dir}/lib/app/"
+      sh "mkdir #{package_dir}/lib/ruby"
+      sh "tar -xzf packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-#{target}.tar.gz -C #{package_dir}/lib/ruby"
+    
+      if os_type == :unix
+        sh "cp packaging/wrapper.sh #{package_dir}/hello"
+      else
+        sh "cp packaging/wrapper.bat #{package_dir}/hello.bat"
+      end
+    
+      sh "cp -pR packaging/vendor #{package_dir}/lib/"
+      sh "cp Gemfile Gemfile.lock #{package_dir}/lib/vendor/"
+      sh "mkdir #{package_dir}/lib/vendor/.bundle"
+      sh "cp packaging/bundler-config #{package_dir}/lib/vendor/.bundle/config"
+      if os_type == :unix
+        sh "tar -xzf packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-#{target}-sqlite3-#{SQLITE3_VERSION}.tar.gz " + "-C #{package_dir}/lib/vendor/ruby"
+      else
+        sh "tar -xzf packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-#{target}.tar.gz " + "-C #{package_dir}/lib/vendor/ruby"
+      end
+      if !ENV['DIR_ONLY']
+        if os_type == :unix
+          sh "tar -czf #{package_dir}.tar.gz #{package_dir}"
+        else
+          sh "zip -9r #{package_dir}.zip #{package_dir}"
+        end
+        sh "rm -rf #{package_dir}"
+      end
+    end
+    
+    def download_runtime(target, gem_name_and_version)
+      sh "cd packaging && curl -L -O --fail " +
+        "https://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-#{TRAVELING_RUBY_VERSION}-#{target}.tar.gz"
+    end
+    
+    def download_native_extension(target, gem_name_and_version)
+      sh "curl -L --fail -o packaging/traveling-ruby-#{TRAVELING_RUBY_VERSION}-#{target}-#{gem_name_and_version}.tar.gz " +
+        "https://d6r77u77i8pq3.cloudfront.net/releases/traveling-ruby-gems-#{TRAVELING_RUBY_VERSION}-#{target}/#{gem_name_and_version}.tar.gz"
+    end
+
+### Creating and testing the package<a id="sec-2-1-4" name="sec-2-1-4"></a>
+
+    rake package:win32
+
+### NB<a id="sec-2-1-5" name="sec-2-1-5"></a>
+
+[important Windows-specific caveats](https://github.com/phusion/traveling-ruby/blob/master/README.md#caveats)
+
+# Shoes<a id="sec-3" name="sec-3"></a>
+
+<./little.rb>
 
     require 'cj-parser'
     
@@ -30,26 +285,32 @@
     
     
     Shoes.app(title: "Case Jewelry Label Maker", width: 800, height: 1000, resizable: true) {
-      background "#c3f4f8".."#fff"
-      fill white
-      border("#fff",
-             strokewidth: 4)
+      #background "#c3f4f8".."#fff"
+      #background "#000"
+      background "img/sheet.png"
+    
+      @days_display = stack(margin: 12) do
+        @days_para = para strong("0")
+    
+        @days_para
+      end
     
       stack(margin: 12) do
         para "Number of Days"
         flow {
           #@days = edit_line :width => 50
-          @days_para = para "0"
     
           button "Choose File" do
             @file = ask_open_file
           end
     
-          button "#{@days_para} Days" do
+          @days_button = button "Days" do
             @days = ask("How many days back?")
-            #animate do
-              @days_para.replace "#{@days}"
-            #end
+            @days_display.clear do
+              @days_para = para strong(@days)
+    
+              @days_para
+            end
           end
     
           button "Submit" do
@@ -68,17 +329,126 @@
           end
         }
     
-        @sheet = image(
-          #"img/label.png",
-          "img/sheet.png",
-          width: 850,
-          height: 1100
-        )
+        # @sheet = image(
+        #   #"img/label.png",
+        #   "img/sheet.png",
+        #   width: 850,
+        #   height: 1100
+        # )
     
       end
     }
 
-# Main<a id="sec-3" name="sec-3"></a>
+## Issues<a id="sec-3-1" name="sec-3-1"></a>
+
+### Packaging<a id="sec-3-1-1" name="sec-3-1-1"></a>
+
+-   Mon May  2 02:59:40 CDT 2016
+    -   try
+        
+        <https://github.com/phusion/traveling-ruby>
+        
+        -   tutorial 1: hello world
+            
+            <file:///home/son/bin/Ruby/TravelingRuby/hello_app/README.md>
+        
+        -   tutorial 2: gem dependencies
+            
+            <file:///home/son/bin/Ruby/TravelingRuby/hello_app_with_gem_dependencies/README.md>
+        
+        -   tutorial 3: native extensions
+            
+            <file:///home/son/bin/Ruby/TravelingRuby/hello_app_with_native_extensions/README.md>
+        
+        -   tutorial 4: windows
+            
+            <file:///home/son/bin/Ruby/TravelingRuby/hello_app_windows/README.md>
+
+-   Mon May  2 01:35:24 CDT 2016
+    
+        cd src
+        gem install warbler
+        shoes -p swt:jar little.rb
+    
+        Packaging swt:jar...
+        Furoshiki::ConfigurationError: Invalid configuration.
+         - Run file configured as 'bin/hello_from_warbler', \
+           but couldn't find file at bin/hello_from_warbler
+         - OS X icon file configured as 'static/Shoes.icns', \
+        but couldn't find file at static/Shoes.icns
+    
+        initialize at /home/son/.rbenv/versions/jruby-9.0.5.0/lib/ruby/gems/shared/gems/furoshiki-0.3.1/lib/furoshiki/jar.rb:11
+        create_packager at /home/son/.rbenv/versions/jruby-9.0.5.0/lib/ruby/gems/shared/gems/shoes-swt-4.0.0.pre5/lib/shoes/swt/packager.rb:74
+        block in run at /home/son/.rbenv/versions/jruby-9.0.5.0/lib/ruby/gems/shared/gems/shoes-swt-4.0.0.pre5/lib/shoes/swt/packager.rb:28
+        each at org/jruby/RubyArray.java:1560
+        run at /home/son/.rbenv/versions/jruby-9.0.5.0/lib/ruby/gems/shared/gems/shoes-swt-4.0.0.pre5/lib/shoes/swt/packager.rb:25
+        run at /home/son/.rbenv/versions/jruby-9.0.5.0/lib/ruby/gems/shared/gems/shoes-core-4.0.0.pre5/lib/shoes/packager.rb:24
+        run at /home/son/.rbenv/versions/jruby-9.0.5.0/lib/ruby/gems/shared/gems/shoes-core-4.0.0.pre5/lib/shoes/ui/cli.rb:70
+        <top> at /home/son/.rbenv/versions/jruby-9.0.5.0/lib/ruby/gems/shared/gems/shoes-swt-4.0.0.pre5/bin/shoes-swt:11
+        load at org/jruby/RubyKernel.java:955
+        <top> at /home/son/.rbenv/versions/jruby-9.0.5.0/bin/shoes-swt:23
+    
+    -   breakdown
+        
+            Packaging swt:jar...
+        
+            Furoshiki::ConfigurationError:
+        
+            Invalid configuration.
+             - Run file configured as 'bin/hello_from_warbler', \
+               but
+        
+            couldn't find file at bin/hello_from_warbler
+        
+             - OS X icon file configured as 'static/Shoes.icns', \
+            but couldn't find file at static/Shoes.icns
+        
+        -   remove app.yaml
+            
+                Packaging swt:jar...
+                NameError: uninitialized constant Bundler
+                          const_missing at org/jruby/RubyModule.java:3212
+            
+            -   <https://github.com/shoes/shoes4/issues/1148>
+                
+                <./src/Gemfile>
+                
+                    source 'https://rubygems.org'
+                    
+                    gem 'shoes', '4.0.0.pre5'
+                    gem 'shoes-swt'
+                    gem 'warbler'
+                
+                    bundle
+                
+                    shoes -p swt:jar little.rb
+                    java -jar little.rb
+                
+                    Ignoring shoes-core-4.0.0.pre5 because its extensions are not \
+                     built.  Try: gem pristine shoes-core --version 4.0.0.pre5
+                    LoadError: no such file to load -- shoes
+                      require at org/jruby/RubyKernel.java:1040
+                      require at /tmp/jruby6735080100235658419extract/jruby-stdlib-1.7.25.jar!/META-INF/jruby.home/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:54
+                       (root) at file:/home/son/IBT/jewelry/Retail_Jewelry/src/pkg/little.jar!/META-INF/init.rb:8
+                      require at org/jruby/RubyKernel.java:1040
+                       (root) at /tmp/jruby6735080100235658419extract/jruby-stdlib-1.7.25.jar!/META-INF/jruby.home/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1
+                      require at /tmp/jruby6735080100235658419extract/jruby-stdlib-1.7.25.jar!/META-INF/jruby.home/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:54
+                    ERROR: org.jruby.embed.EvalFailedException: (LoadError) no such file to load -- shoes
+                
+                -   Dec 14, 2015 : last message at <https://github.com/shoes/shoes4/issues/1148>
+                
+                -   Source <https://github.com/davorb/shoes4>
+                    -   fork it, let's do this!
+                        
+                        <https://github.com/son1112/shoes4>
+                        
+                            git clone git@github.com:son1112/shoes4.git
+                        
+                        <file:///home/son/src/shoes4-fork>
+                        
+                            haha, should call it shoes4rk
+
+# Main<a id="sec-4" name="sec-4"></a>
 
 <./cj-parser.rb>
 
@@ -283,7 +653,7 @@
       end
     end
 
-# Classes<a id="sec-4" name="sec-4"></a>
+# Classes<a id="sec-5" name="sec-5"></a>
 
 <./lib/label.rb>
 
@@ -304,9 +674,9 @@
     
     end
 
-# Modules<a id="sec-5" name="sec-5"></a>
+# Modules<a id="sec-6" name="sec-6"></a>
 
-## Sheets<a id="sec-5-1" name="sec-5-1"></a>
+## Sheets<a id="sec-6-1" name="sec-6-1"></a>
 
 <./lib/sheets.rb>
 

@@ -34,18 +34,25 @@
     #+begin_src ruby :tangle Gemfile :padline no
       source 'https://rubygems.org'
 
+      ruby '2.2.3', :engine => 'jruby', :engine_version => '9.0.5.0'
+
       gem 'faker'
-      gem 'sqlite3', '1.3.9'
+      gem 'json'
+      gem 'chronic'
+      gem 'roo', '~> 2.3.2'
+      gem 'shoes-core', '~> 4.0.0.pre5'
+      gem 'shoes-swt', '~> 4.0.0.pre5'
 
       group :development do
         gem 'rake'
       end
+
     #+end_src
 
     [[./hello.rb]]
 
     #+NAME: hello.rb
-    #+begin_src ruby :tangle hello.rb :padline no
+    #+begin_src ruby 
 
       #!/usr/bin/env ruby
       require 'faker'
@@ -61,7 +68,7 @@
     [[./packaging/wrapper.sh]]
 
     #+NAME: wrapper.sh
-    #+begin_src sh :tangle packaging/wrapper.sh :padline no
+    #+begin_src sh 
       #!/bin/bash
       set -e
 
@@ -84,7 +91,7 @@
 
     [[./packaging/bundler-config]]
 
-    #+begin_src ruby :tangle packaging/bundler-config :padline no
+    #+begin_src ruby 
       BUNDLE_PATH: .
       BUNDLE_WITHOUT: development
       BUNDLE_DISABLE_SHARED_GEMS: '1'
@@ -99,7 +106,7 @@
 
     [[./packaging/wrapper.bat]]
 
-    #+begin_src text :tangle packaging/wrapper.bat :padline no
+    #+begin_src text 
       @echo off
 
       :: Tell Bundler where the Gemfile and gems are.
@@ -461,8 +468,8 @@
 #+begin_src ruby :tangle cj-parser.rb
   require 'json'
   require 'chronic'
-  require 'rubyXL'
-  require 'docx'
+  #require 'rubyXL'
+  #require 'docx'
   require 'roo'
 
   require './lib/sheets.rb'

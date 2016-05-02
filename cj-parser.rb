@@ -1,8 +1,8 @@
 
 require 'json'
 require 'chronic'
-require 'rubyXL'
-require 'docx'
+#require 'rubyXL'
+#require 'docx'
 require 'roo'
 
 require './lib/sheets.rb'

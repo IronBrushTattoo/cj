@@ -62,8 +62,14 @@ Tutorial 4: creating packages for Windows
 
     source 'https://rubygems.org'
     
+    ruby '2.2.3', :engine => 'jruby', :engine_version => '9.0.5.0'
+    
     gem 'faker'
-    gem 'sqlite3', '1.3.9'
+    gem 'json'
+    gem 'chronic'
+    gem 'roo', '~> 2.3.2'
+    gem 'shoes-core', '~> 4.0.0.pre5'
+    gem 'shoes-swt', '~> 4.0.0.pre5'
     
     group :development do
       gem 'rake'
@@ -454,8 +460,8 @@ Tutorial 4: creating packages for Windows
 
     require 'json'
     require 'chronic'
-    require 'rubyXL'
-    require 'docx'
+    #require 'rubyXL'
+    #require 'docx'
     require 'roo'
     
     require './lib/sheets.rb'
